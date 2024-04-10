@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rediger Profil</title>
+    <link th:href="@{/css/registerAndProfile-style.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Rediger Profil</h1>
+    <form th:action="@{/profile}" th:object="${user}" method="post">
+        <div class="form-group">
+            <label for="firstname">Fornavn:</label>
+            <input type="text" id="firstname" th:field="*{firstname}" required />
+        </div>
+        <div class="form-group">
+            <label for="lastname">Efternavn:</label>
+            <input type="text" id="lastname" th:field="*{lastname}" required />
+        </div>
+        <div class="form-group">
+            <label for="username">Brugernavn:</label>
+            <input type="text" id="username" th:field="*{username}" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Adgangskode:</label>
+            <input type="password" id="password" th:field="*{password}" placeholder="******" />
+        </div>
+        <button type="submit" class="btn">Gem Profil</button>
+    </form>
+</div>
+</body>
+</html>

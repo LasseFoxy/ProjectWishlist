@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    margin: auto;
+    width: 80%; /* Ændret til en procentdel for at gøre layoutet mere responsivt */
+    max-width: 600px; /* Tilføjet maksimal bredde for bedre læselighed på større skærme */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* Centrerer indholdet */
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+li a {
+    text-decoration: none;
+    color: blue;
+}
+
+li a:hover {
+    text-decoration: underline;
+    color: darkblue;
+}
+
+.buttons {
+    text-align: center; /* Justeret placering af knapper til center */
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

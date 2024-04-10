@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #17a2b8;
+    margin-bottom: 20px; /* Tilføjer lidt plads under overskriften */
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.links-container {
+    display: flex;
+    justify-content: center;
+}
+
+.home-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background-color: #8a2be2; /* En mørkere nuance af lilla */
+    color: white;
+    text-decoration: none;
+    border-radius: 20px; /* Runde hjørner */
+    width: 150px; /* Ensartet bredde */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjer en let skygge for dybde */
+}
+
+.home-link:hover {
+    background-color: #7a1be0; /* En endnu mørkere nuance for hover effekt */
+}

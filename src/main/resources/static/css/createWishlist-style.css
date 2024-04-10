@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    margin: auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; /* Justerer containerens indhold til center */
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; /* Justerer afstanden mellem overskrifter og felter */
+    text-align: left; /* Venstrejusterer overskrifter */
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px; /* Justerer tekststørrelse */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-back {
+    margin-top: 30px; /* Justerer afstand fra toppen */
+}

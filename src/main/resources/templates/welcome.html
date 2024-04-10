@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Velkommen</title>
+    <link th:href="@{/css/welcome-style.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Velkommen, <span th:text="${loggedInUser.firstname}"></span></h1>
+    <a th:href="@{/wishlist/create}" class="btn">Opret ønskeliste</a>
+
+    <div class="section">
+        <h2>Ønskelister</h2>
+        <ul>
+            <li th:each="wishlist : ${userWishlists}">
+                <span th:text="${wishlist.wishlistName}"></span>
+                <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="btn">Se/rediger</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Brugerens oplysninger</h2>
+        <p><strong>Fornavn:</strong> <span th:text="${loggedInUser.firstname}"></span></p>
+        <p><strong>Efternavn:</strong> <span th:text="${loggedInUser.lastname}"></span></p>
+        <p><strong>Brugernavn:</strong> <span th:text="${loggedInUser.username}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${loggedInUser.email}"></span></p>
+    </div>
+
+    <div class="buttons">
+        <a th:href="@{/}" class="btn">Log ud</a>
+        <a th:href="@{/profile}" class="btn">Se/rediger profil</a>
+    </div>
+</div>
+</body>
+</html>
