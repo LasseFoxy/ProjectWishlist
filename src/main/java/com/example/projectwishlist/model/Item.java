@@ -3,7 +3,7 @@ package com.example.projectwishlist.model;
 
 public class Item {
 
-    private int itemId;
+  private int itemId;
   private String itemName;
   private String itemLastname;
   private double itemPrice;
@@ -13,18 +13,20 @@ public class Item {
   private int itemWishlistid;
   private int itemQuantity;
 
-    // Konstruktør
-    public Item() {
-      this.itemId = id;
-      this.itemName = name;
-      this.itemLastname = lastname;
-      this.itemPrice = price;
-      this.itemDescription = description;
-      this.itemLink = link;
-      this.itemReservedstatus = reservedstatus;
-      this.itemWishlistid = wishlistid;
-      this.itemQuantity=itemQuantity;
-    }
+  // Konstruktør
+  public Item(int itemId, String itemName, String itemLastname, double itemPrice, String itemDescription, String itemLink, boolean itemReservedstatus, int itemWishlistid, int itemQuantity) {
+    this.itemId = itemId;
+    this.itemName = itemName;
+    this.itemLastname = itemLastname;
+    this.itemPrice = itemPrice;
+    this.itemDescription = itemDescription;
+    this.itemLink = itemLink;
+    this.itemReservedstatus = itemReservedstatus;
+    this.itemWishlistid = itemWishlistid;
+    this.itemQuantity = itemQuantity;
+
+  }
+
 
     // Gettere og settere
     public int getId() {
