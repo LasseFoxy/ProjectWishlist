@@ -1,0 +1,52 @@
+a {
+    font-family: Arial, sans-serif;
+    font-palette: light;
+    color: white;
+    text-decoration: none;
+    margin-right: 2.5vw;
+    margin-left: 1vw;
+    font-size: 1vw;
+    font-weight: 700;
+}
+
+.header-container {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Bruger hele viewport bredden */
+    height: 60px; /* Juster højden efter behov */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #af67dc, #be74ed, #ab72f3);
+
+}
+
+.header-text {
+    font-family: "Baskerville Old Face", sans-serif;
+    font-size: 30px; /* Juster størrelsen efter behov */
+    margin-top: 0;
+    font-weight: bold; /* Gør teksten fed */
+    color: white; /* Angiv farven på teksten */
+}
+
+.left img {
+    width: 30px; /* Juster størrelsen på hjemknapbilledet */
+    height: auto; /* Sørg for proportional størrelse */
+    margin-left: 1vw;
+}
+
+.left a{
+    margin:0.5vw;
+}
+
+.right {
+    text-decoration: none;
+    color: #fff; /* Hvid farve til knaptekst */
+    margin-right: 2vw;
+}
+
+.right a:hover {
+    text-decoration: underline; /* Understreg linket ved hover */
+}
