@@ -16,7 +16,7 @@ public class ItemController {
 
   @GetMapping("/Ønskelisten")
   public String showItem(Model model) {
-    model.addAttribute("item", new Item());
+    //model.addAttribute("item", new Item());
     return "item";
   }
 
