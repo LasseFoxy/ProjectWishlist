@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Se/Rediger Ønskeliste</title>
+    <link th:href="@{/css/welcome-style.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Se/Rediger Ønskeliste</h1>
+
+    <form th:object="${wishlist}" th:action="@{/wishlist/update/{wishlistId}(wishlistId=${wishlist.wishlistId})}" method="post">
+        <input type="hidden" th:field="*{wishlistId}" />
+        <div class="form-group">
+            <label for="wishlistName">Navn på ønskeliste:</label>
+            <input type="text" id="wishlistName" th:field="*{wishlistName}" required />
+        </div>
+        <div class="form-group">
+            <label for="wishlistDeadlineDate">Deadline dato:</label>
+            <input type="date" id="wishlistDeadlineDate" th:field="*{wishlistDeadlineDate}" />
+        </div>
+        <div class="form-group">
+            <label for="wishlistDescription">Beskrivelse:</label>
+            <textarea id="wishlistDescription" th:field="*{wishlistDescription}"></textarea>
+        </div>
+        <button type="submit" class="btn">Gem</button>
+    </form>
+
+    <!-- Tilføj kode til at vise og redigere elementer i ønskelisten -->
+
+    <div class="buttons">
+        <a th:href="@{/welcome}" class="btn">Tilbage til Velkommen</a>
+    </div>
+</div>
+</body>
+</html>
