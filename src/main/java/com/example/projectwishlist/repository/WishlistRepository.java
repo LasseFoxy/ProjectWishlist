@@ -17,7 +17,7 @@ public class WishlistRepository {
 
     public void save(Wishlist wishlist) {
         String sql = "INSERT INTO wishlists (wishlist_name, wishlist_deadline_date, wishlist_description, user_id) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, wishlist.getWishlistName(), wishlist.getDeadlineDate(), wishlist.getDescription(), wishlist.getUserId());
+        jdbcTemplate.update(sql, wishlist.getWishlistName(), wishlist.getWishlistDeadlineDate(), wishlist.getWishlistDescription(), wishlist.getUserId());
     }
 
 
@@ -30,7 +30,7 @@ public class WishlistRepository {
         }
     }
 
-    public Wishlist findById(Long wishlistId) {
+    public Wishlist findById(int wishlistId) {
         String sql = "SELECT * FROM wishlists WHERE wishlist_id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{wishlistId}, new BeanPropertyRowMapper<>(Wishlist.class));
@@ -41,10 +41,10 @@ public class WishlistRepository {
 
     public void update(Wishlist wishlist) {
         String sql = "UPDATE wishlists SET wishlist_name = ?, wishlist_deadline_date = ?, wishlist_description = ? WHERE wishlist_id = ?";
-        jdbcTemplate.update(sql, wishlist.getWishlistName(), wishlist.getDeadlineDate(), wishlist.getDescription(), wishlist.getWishlistId());
+        jdbcTemplate.update(sql, wishlist.getWishlistName(), wishlist.getWishlistDeadlineDate(), wishlist.getWishlistDescription(), wishlist.getWishlistId());
     }
 
-    public void delete(Long wishlistId) {
+    public void delete(int wishlistId) {
         String sql = "DELETE FROM wishlists WHERE wishlist_id = ?";
         jdbcTemplate.update(sql, wishlistId);
     }

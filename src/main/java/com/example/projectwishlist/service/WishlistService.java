@@ -21,7 +21,7 @@ public class WishlistService {
         return wishlistRepository.findByUserId(userId);
     }
 
-    public Wishlist getWishlistById(Long wishlistId) {
+    public Wishlist getWishlistById(int wishlistId) {
         return wishlistRepository.findById(wishlistId);
     }
 
@@ -29,7 +29,7 @@ public class WishlistService {
         wishlistRepository.update(wishlist);
     }
 
-    public void delete(Long wishlistId) {
+    public void delete(int wishlistId) {
         wishlistRepository.delete(wishlistId);
     }
 }

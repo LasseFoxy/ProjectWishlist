@@ -14,8 +14,14 @@
         <h2>Ønskelister</h2>
         <ul>
             <li th:each="wishlist : ${userWishlists}">
-                <span th:text="${wishlist.wishlistName}"></span>
-                <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="btn">Se/rediger</a>
+                <div class="buttons">
+                    <span th:text="${wishlist.wishlistName}"></span>
+                    <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="btn">Se/rediger</a>
+                    <form th:action="@{/setSelectedWishlist}" method="post">
+                        <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
+                        <button type="submit" class="btn">Tilføj ønsker></button>
+                    </form>
+                </div>
             </li>
         </ul>
     </div>
@@ -29,7 +35,7 @@
     </div>
 
     <div class="buttons">
-        <a th:href="@{/}" class="btn">Log ud</a>
+        <a th:href="@{/logout}" class="btn">Log ud</a>
         <a th:href="@{/profile}" class="btn">Se/rediger profil</a>
     </div>
 </div>

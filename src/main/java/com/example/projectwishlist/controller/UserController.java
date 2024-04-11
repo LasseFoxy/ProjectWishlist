@@ -71,6 +71,18 @@ public class UserController {
         }
     }
 
+    @PostMapping("/setSelectedWishlist")
+    public String setSelectedWishlist(@RequestParam("wishlistId") int wishlistId, HttpSession session) {
+        Wishlist selectedWishlist = wishlistService.getWishlistById(wishlistId);
+        if (selectedWishlist != null) {
+            session.setAttribute("selectedWishlist", selectedWishlist);
+        } else {
+            return "welcome";
+        }
+        return "redirect:/wishlist/wishlistItems";
+    }
+
+
     @GetMapping("/profile")
     public String showProfilePage(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -92,4 +104,11 @@ public class UserController {
         session.setAttribute("loggedInUser", user);
         return "redirect:/welcome";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("loggedInUser"); // Fjern brugeren fra sessionen
+        return "redirect:/"; // Omdiriger til login-siden
+    }
+
 }

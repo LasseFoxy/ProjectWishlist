@@ -9,8 +9,8 @@ body {
     background-color: white;
     padding: 20px;
     margin: auto;
-    width: 80%; /* Ændret til en procentdel for at gøre layoutet mere responsivt */
-    max-width: 600px; /* Tilføjet maksimal bredde for bedre læselighed på større skærme */
+    width: 80%;
+    max-width: 800px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center; /* Centrerer indholdet */
@@ -22,11 +22,11 @@ h1, h2 {
 
 .section {
     margin-bottom: 20px;
+
 }
 
 ul {
     list-style-type: none;
-    padding: 0;
 }
 
 li {
@@ -44,12 +44,15 @@ li a:hover {
 }
 
 .buttons {
-    text-align: center; /* Justeret placering af knapper til center */
+    display: flex;
+    justify-content: center; /* Centrerer knapperne vandret */
+    margin-top: 20px; /* Juster afstanden mellem sektioner */
 }
 
 .btn {
     display: inline-block;
     padding: 8px 16px;
+    margin-left: 10px;
     margin-right: 10px;
     background-color: #007bff;
     color: white;
@@ -61,3 +64,4 @@ li a:hover {
 .btn:hover {
     background-color: #0056b3;
 }
+

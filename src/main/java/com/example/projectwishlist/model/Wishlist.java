@@ -5,18 +5,18 @@ import java.time.LocalDate;
 public class Wishlist {
     private int wishlistId;
     private String wishlistName;
-    private LocalDate deadlineDate;
-    private String description;
-    private int userId; // Refererer til brugerens ID
+    private LocalDate wishlistDeadlineDate;
+    private String wishlistDescription;
+    private int userId;
 
     public Wishlist(){
     }
 
-    public Wishlist(int wishlistId, String wishlistName, LocalDate deadlineDate, String description, int userId) {
+    public Wishlist(int wishlistId, String wishlistName, LocalDate wishlistDeadlineDate, String wishlistDescription, int userId) {
         this.wishlistId = wishlistId;
         this.wishlistName = wishlistName;
-        this.deadlineDate = deadlineDate;
-        this.description = description;
+        this.wishlistDeadlineDate = wishlistDeadlineDate;
+        this.wishlistDescription = wishlistDescription;
         this.userId = userId;
     }
 
@@ -36,20 +36,20 @@ public class Wishlist {
         this.wishlistName = wishlistName;
     }
 
-    public LocalDate getDeadlineDate() {
-        return deadlineDate;
+    public LocalDate getWishlistDeadlineDate() {
+        return wishlistDeadlineDate;
     }
 
-    public void setDeadlineDate(LocalDate deadlineDate) {
-        this.deadlineDate = deadlineDate;
+    public void setWishlistDeadlineDate(LocalDate wishlistDeadlineDate) {
+        this.wishlistDeadlineDate = wishlistDeadlineDate;
     }
 
-    public String getDescription() {
-        return description;
+    public String getWishlistDescription() {
+        return wishlistDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWishlistDescription(String wishlistDescription) {
+        this.wishlistDescription = wishlistDescription;
     }
 
     public int getUserId() {

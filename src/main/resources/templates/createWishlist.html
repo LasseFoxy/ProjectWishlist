@@ -14,9 +14,9 @@
         <label for="name">Navn på ønskeliste:</label>
         <input type="text" id="name" name="name" th:field="*{wishlistName}" required>
         <label for="deadline">Deadline (valgfri):</label>
-        <input type="date" id="deadline" name="deadline" th:field="*{deadlineDate}">
-        <label for="description">Beskrivelse (valgfri):</label>
-        <textarea id="description" name="description" th:field="*{description}"></textarea>
+        <input type="date" id="deadline" name="deadline" th:field="*{wishlistDeadlineDate}">
+        <label for="wishlistDescription">Beskrivelse (valgfri):</label>
+        <textarea id="wishlistDescription" name="wishlistDescription" th:field="*{wishlistDescription}"></textarea>
         <button type="submit" class="btn">Opret</button> <!-- Omdøbt til btn -->
     </form>
     <a th:href="@{/welcome}" class="btn">Tilbage til Velkomstsiden</a> <!-- Omdøbt til btn -->
