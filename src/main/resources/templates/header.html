@@ -1,0 +1,26 @@
+<div th:fragment="header">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ønskelisten</title>
+        <link th:href="@{/css/header.css}" rel="stylesheet">
+    </head>
+
+    <div class="header-container">
+        <div class="left">
+            <a th:href="@{/}">
+                <img th:src="@{/images/header/home-button.png}" alt="Home">
+            </a>
+            <span class="header-text">ØNSKELISTEN</span>
+        </div>
+        <div class="right">
+            <div th:if="${loggedInUser == null}">
+                <a th:href="@{/user/register}">Opret bruger</a>
+                <a th:href="@{/user/login}">Login</a>
+            </div>
+            <div th:if="${loggedInUser != null}">
+                <a th:href="@{/profile}">Min profil</a>
+                <a th:href="@{/logout}">Log ud</a>
+            </div>
+        </div>
+    </div>
+</div>

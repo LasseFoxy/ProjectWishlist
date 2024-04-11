@@ -1,17 +1,5 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
-.container {
-    background-color: white;
-    padding: 20px;
-    margin: auto;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+.content {
+    margin-top: 100px;
 }
 
 .form-group {
