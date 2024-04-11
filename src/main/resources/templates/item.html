@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ønskelisten</title>
+  <link th:href="@{/css/item.css}" rel="stylesheet">
+  </head>
+  <body>
+  <h1>Create New Item</h1>
+  <form action="/saveItem" method="post">
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" name="itemName" required><br>
+
+    <label for="itemPrice">Item Price:</label>
+    <input type="number" id="itemPrice" name="itemPrice" step="0.01" required><br>
+
+    <label for="itemDescription">Item Description:</label>
+    <textarea id="itemDescription" name="itemDescription" required></textarea><br>
+
+    <label for="itemQuantity">Item Quantity:</label>
+    <input type="number" id="itemQuantity" name="itemQuantity" required><br>
+
+    <label for="itemLink">Item Link:</label>
+    <input type="url" id="itemLink" name="itemLink"><br>
+
+    <!-- Hidden fields -->
+    <input type="hidden" id="itemId" name="itemId" value=""><br>
+    <input type="hidden" id="wishlistId" name="wishlistId" value="">
+
+    <button type="submit">Submit</button>
+  </form>
+  </body>
+  </html>

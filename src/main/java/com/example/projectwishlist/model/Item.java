@@ -14,7 +14,7 @@ public class Item {
   private int itemQuantity;
 
   // Konstruktør
-  public Item(int itemId, String itemName, String itemLastname, double itemPrice, String itemDescription, String itemLink, boolean itemReservedstatus, int itemWishlistid, int itemQuantity) {
+  public Item() {
     this.itemId = itemId;
     this.itemName = itemName;
     this.itemLastname = itemLastname;
