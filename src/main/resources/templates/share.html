@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilføj Ønske til Ønskeliste</title>
+    <link th:href="@{/css/wishlistItems.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Tilføj Ønske til Ønskeliste</h1>
+    <hr>
+    <div class="wishlist-info">
+        <!-- Viser information om ønskelisten -->
+        <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
+        <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
+        <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
+        <p ><strong>Delings Link:</strong> <span th:text="${shareLink}"></span></p>
+        <button onclick="copyLink()">Del Ønskeliste</button>
+        <script>
+            function copyLink() {
+                var linkToCopy = document.getElementById("shareLink").innerText;
+                var tempInput = document.createElement("input");
+                tempInput.value = linkToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("Link copied to clipboard: " + linkToCopy);
+            }
+        </script>
+        <p id="shareLink" th:text="${shareLink}" style="display: none;"></p>
+    </div>
+
+</div>
+
+</body>
+</html>
