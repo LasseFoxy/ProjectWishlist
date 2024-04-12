@@ -48,4 +48,13 @@ public class WishlistRepository {
         String sql = "DELETE FROM wishlists WHERE wishlist_id = ?";
         jdbcTemplate.update(sql, wishlistId);
     }
+
+    public Wishlist findWishListByItemID(int itemId){
+        String sql = "SELECT wishlists.wishlist_id" +
+                "  FROM wishlists" +
+                " INNER JOIN items \n" +
+                " ON wishlists.wishlist_id = items.wishlist_id" +
+                " WHERE item_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{itemId}, new BeanPropertyRowMapper<>(Wishlist.class));
+    }
 }

@@ -4,11 +4,13 @@ import com.example.projectwishlist.model.Item;
 import com.example.projectwishlist.model.User;
 import com.example.projectwishlist.model.Wishlist;
 import com.example.projectwishlist.service.ItemService;
+import com.example.projectwishlist.service.UserService;
 import com.example.projectwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -17,10 +19,12 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
     private final ItemService itemService;
+    private final UserService userService;
 
-    public WishlistController(WishlistService wishlistService, ItemService itemService) {
+    public WishlistController(WishlistService wishlistService, ItemService itemService, UserService userService) {
         this.wishlistService = wishlistService;
         this.itemService = itemService;
+        this.userService = userService;
     }
 
     @GetMapping("/wishlist/create")
@@ -95,8 +99,7 @@ public class WishlistController {
         if (loggedInUser != null){
             Wishlist selectedWishlist = wishlistService.getWishlistById(wishlist_id);
             String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
-            String linkToCopy = link;
-            model.addAttribute("shareLink", linkToCopy);
+            model.addAttribute("shareLink", link);
             model.addAttribute("wishlist", selectedWishlist);
             List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
             model.addAttribute("wishlist", selectedWishlist);
@@ -106,6 +109,26 @@ public class WishlistController {
             return "redirect:/welcome";
         }
 
+    }
+
+    @PostMapping("/wishlist/share/")
+    public String reserveItem(@ModelAttribute Item item, HttpSession session, Model model){
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        itemService.findItemByID(item.getItemId());
+        item.setItemWishlistId(wishlistService.findWishListByItemID(item.getItemId()).getWishlistId());
+        if (loggedInUser != null) {
+            System.out.println(item.getItemWishlistId());
+            item.setItemReservedName(userService.getUserById(loggedInUser.getUserId()).getFirstname() + " " + userService.getUserById(loggedInUser.getUserId()).getLastname());
+            item.setItemReservedStatus(true);
+            itemService.toggleReservationStatus(item);
+            Wishlist selectedWishlist = wishlistService.getWishlistById(item.getItemWishlistId());
+            List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
+            model.addAttribute("wishlist", selectedWishlist);
+            model.addAttribute("wishlistItems", wishlistItems);
+            return "share";
+        } else {
+            return "redirect:/welcome";
+        }
     }
 
 
