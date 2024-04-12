@@ -1,20 +1,26 @@
 package com.example.projectwishlist.controller;
 
+import com.example.projectwishlist.model.Item;
 import com.example.projectwishlist.model.User;
 import com.example.projectwishlist.model.Wishlist;
+import com.example.projectwishlist.service.ItemService;
 import com.example.projectwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class WishlistController {
 
     private final WishlistService wishlistService;
+    private final ItemService itemService;
 
-    public WishlistController(WishlistService wishlistService) {
+    public WishlistController(WishlistService wishlistService, ItemService itemService) {
         this.wishlistService = wishlistService;
+        this.itemService = itemService;
     }
 
     @GetMapping("/wishlist/create")
@@ -41,6 +47,24 @@ public class WishlistController {
         }
     }
 
+    @GetMapping("/wishlist/wishlistItems")
+    public String wishlistItems(Model model, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Wishlist selectedWishlist = (Wishlist) session.getAttribute("selectedWishlist");
+
+        if (loggedInUser != null && selectedWishlist != null) {
+            if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
+                List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
+                model.addAttribute("wishlist", selectedWishlist);
+                model.addAttribute("wishlistItems", wishlistItems);
+                return "wishlistItems";
+            } else {
+                return "redirect:/welcome";
+            }
+        } else {
+            return "redirect:/user/login";
+        }
+    }
     @GetMapping("/wishlist/edit/{wishlistId}")
     public String showEditWishlistForm(@PathVariable int wishlistId, Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -61,24 +85,6 @@ public class WishlistController {
         return "redirect:/welcome";
     }
 
-
-    @GetMapping("/wishlist/wishlistItems")
-    public String showAddItemForm(Model model, HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        Wishlist selectedWishlist = (Wishlist) session.getAttribute("selectedWishlist");
-
-        if (loggedInUser != null && selectedWishlist != null) {
-            if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
-                model.addAttribute("wishlist", selectedWishlist);
-                return "wishlistItems";
-            } else {
-                return "redirect:/welcome";
-            }
-        } else {
-            return "redirect:/user/login";
-        }
-    }
-
     @GetMapping("/wishlist/share/{wishlist_id}")
     public String shareWishlist(@PathVariable int wishlist_id, Model model, HttpSession session){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -94,5 +100,4 @@ public class WishlistController {
         }
 
     }
-
 }
