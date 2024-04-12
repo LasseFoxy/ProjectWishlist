@@ -54,6 +54,10 @@ public class WishlistController {
 
         if (loggedInUser != null && selectedWishlist != null) {
             if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
+                int wishlist_id = selectedWishlist.getWishlistId();
+                String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+                model.addAttribute("shareLink", link);
+                model.addAttribute("wishlist", selectedWishlist);
                 List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
                 model.addAttribute("wishlist", selectedWishlist);
                 model.addAttribute("wishlistItems", wishlistItems);
@@ -88,16 +92,21 @@ public class WishlistController {
     @GetMapping("/wishlist/share/{wishlist_id}")
     public String shareWishlist(@PathVariable int wishlist_id, Model model, HttpSession session){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
-        Wishlist selectedWishlist = wishlistService.getWishlistById(wishlist_id);
-        String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
-        String linkToCopy = link;
-        model.addAttribute("shareLink", linkToCopy);
-        model.addAttribute("wishlist", selectedWishlist);
         if (loggedInUser != null){
+            Wishlist selectedWishlist = wishlistService.getWishlistById(wishlist_id);
+            String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+            String linkToCopy = link;
+            model.addAttribute("shareLink", linkToCopy);
+            model.addAttribute("wishlist", selectedWishlist);
+            List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
+            model.addAttribute("wishlist", selectedWishlist);
+            model.addAttribute("wishlistItems", wishlistItems);
             return "share";
         } else {
             return "redirect:/welcome";
         }
 
     }
+
+
 }

@@ -14,21 +14,20 @@
         <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
         <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
         <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
-        <p ><strong>Delings Link:</strong> <span th:text="${shareLink}"></span></p>
-        <button onclick="copyLink()">Del Ønskeliste</button>
-        <script>
-            function copyLink() {
-                var linkToCopy = document.getElementById("shareLink").innerText;
-                var tempInput = document.createElement("input");
-                tempInput.value = linkToCopy;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempInput);
-                alert("Link copied to clipboard: " + linkToCopy);
-            }
-        </script>
-        <p id="shareLink" th:text="${shareLink}" style="display: none;"></p>
+    </div>
+    <div class="wishlist-items">
+        <h2>Items i Ønskeliste</h2>
+        <ul>
+            <li th:each="item : ${wishlistItems}">
+                <div class="item-info">
+                    <p><strong>Item Navn:</strong> <span th:text="${item.itemName}">Item navn</span></p>
+                    <p><strong>Pris:</strong> <span th:text="${item.itemPrice}">Pris</span></p>
+                    <p><strong>Antal:</strong> <span th:text="${item.itemQuantity}">Antal</span></p>
+                    <p><strong>Reserveret:</strong> <span th:text="${item.itemReservedStatus}">Reserveret</span></p>
+                    <p><strong>Reserveret Navn:</strong> <span th:text="${item.itemReservedName}">Reserveret Navn</span></p>
+                </div>
+            </li>
+        </ul>
     </div>
 
 </div>
