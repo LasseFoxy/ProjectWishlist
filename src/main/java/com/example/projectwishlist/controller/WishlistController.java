@@ -48,7 +48,7 @@ public class WishlistController {
 
         if (loggedInUser != null && wishlist != null && wishlist.getUserId() == loggedInUser.getUserId()) {
             model.addAttribute("wishlist", wishlist);
-            return "updateWishlist"; // Navnet på din HTML-fil til visning/redigering af ønskesedlen
+            return "updateWishlist"; // Navnet på vores HTML-fil til visning/redigering af ønskesedlen
         } else {
             return "redirect:/welcome"; // Eller en anden side, hvis brugeren ikke har adgang til ønskesedlen
         }
