@@ -1,3 +1,7 @@
+.content {
+    margin-top: 100px;
+}
+
 .container {
     background-color: white;
     padding: 20px;
@@ -5,6 +9,11 @@
     width: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+}
+
+p {
+    display: inline-block;
+    margin-right: 10px; /* Juster margenen efter behov */
 }
 
 h1 {
@@ -40,15 +49,17 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-button.btn {
+.btn {
     padding: 10px 20px;
     background-color: #007bff;
-    color: white;
+    color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
+
 }
 
-button.btn:hover {
+.btn:hover {
     background-color: #0056b3;
 }

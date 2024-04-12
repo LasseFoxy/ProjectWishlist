@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ønskelisten</title>
+  <link th:href="@{/css/addItem.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{/header :: header}"></div>
+
+<div class="content">
+  <div class="container">
+    <h1>Create New Item</h1>
+    <p>Wishlist ID: <span th:text="${wishlistId}"></span></p>
+    <form th:action="@{/saveItem}" method="post" th:object="${item}">
+      <input type="hidden" id="wishlistId" name="wishlistId" th:value="${wishlistId}">
+
+      <label for="itemName">Navn:</label>
+      <input type="text" id="itemName" name="itemName" th:field="*{itemName}" th:required><br>
+
+      <label for="itemPrice">Pris:</label>
+      <input type="number" id="itemPrice" name="itemPrice" th:field="*{itemPrice}" th:required><br>
+
+
+
+      <label for="itemQuantity">Antal:</label>
+      <input type="number" id="itemQuantity" name="itemQuantity" th:field="*{itemQuantity}" th:required><br>
+
+      <label for="itemLink">Link:</label>
+      <input type="url" id="itemLink" name="itemLink" th:field="*{itemLink}"><br>
+
+      <label for="itemDescription">Beskrivelse:</label>
+      <textarea id="itemDescription" name="itemDescription" th:field="*{itemDescription}" th:required></textarea><br>
+
+      <button type="submit">Tilføj ønske</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+

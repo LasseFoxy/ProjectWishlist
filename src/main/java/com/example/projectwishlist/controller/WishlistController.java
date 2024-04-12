@@ -1,20 +1,26 @@
 package com.example.projectwishlist.controller;
 
+import com.example.projectwishlist.model.Item;
 import com.example.projectwishlist.model.User;
 import com.example.projectwishlist.model.Wishlist;
+import com.example.projectwishlist.service.ItemService;
 import com.example.projectwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class WishlistController {
 
     private final WishlistService wishlistService;
+    private final ItemService itemService;
 
-    public WishlistController(WishlistService wishlistService) {
+    public WishlistController(WishlistService wishlistService, ItemService itemService) {
         this.wishlistService = wishlistService;
+        this.itemService = itemService;
     }
 
     @GetMapping("/wishlist/create")
@@ -42,13 +48,15 @@ public class WishlistController {
     }
 
     @GetMapping("/wishlist/wishlistItems")
-    public String showAddItemForm(Model model, HttpSession session) {
+    public String wishlistItems(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         Wishlist selectedWishlist = (Wishlist) session.getAttribute("selectedWishlist");
 
         if (loggedInUser != null && selectedWishlist != null) {
             if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
+                List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
                 model.addAttribute("wishlist", selectedWishlist);
+                model.addAttribute("wishlistItems", wishlistItems);
                 return "wishlistItems";
             } else {
                 return "redirect:/welcome";
@@ -76,22 +84,4 @@ public class WishlistController {
         wishlistService.update(wishlist);
         return "redirect:/welcome";
     }
-
-   /* @PostMapping("/wishlist/wishlistItems")
-    public String addItemToWishlist(@ModelAttribute Item item, HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-        Wishlist selectedWishlist = (Wishlist) session.getAttribute("selectedWishlist");
-
-        if (loggedInUser != null && selectedWishlist != null) {
-            if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
-                wishlistService.addItemToWishlist(selectedWishlist, item);
-                // Muligvis opdater session med den opdaterede wishlist efter tilføjelse af item
-                session.setAttribute("selectedWishlist", selectedWishlist);
-                return "redirect:/wishlist";
-            }
-        }
-        return "redirect:/user/login";
-    }
-    */
-
 }

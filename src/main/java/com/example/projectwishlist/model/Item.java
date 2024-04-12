@@ -5,99 +5,116 @@ public class Item {
 
   private int itemId;
   private String itemName;
-  private String itemLastname;
   private double itemPrice;
-  private String itemDescription;
-  private String itemLink;
-  private boolean itemReservedstatus;
-  private int itemWishlistid;
   private int itemQuantity;
+  private String itemLink;
+  private String itemDescription;
+  private boolean itemReservedStatus;
+  private String itemReservedName;
+  private int itemWishlistId;
 
-  // Konstruktør
+
   public Item() {
-    this.itemId = itemId;
-    this.itemName = itemName;
-    this.itemLastname = itemLastname;
-    this.itemPrice = itemPrice;
-    this.itemDescription = itemDescription;
-    this.itemLink = itemLink;
-    this.itemReservedstatus = itemReservedstatus;
-    this.itemWishlistid = itemWishlistid;
-    this.itemQuantity = itemQuantity;
-
   }
 
+  public Item(int itemId, String itemName, double itemPrice, int itemQuantity, String itemLink, String itemDescription, boolean itemReservedStatus, String itemReservedName, int itemWishlistId) {
+    this.itemId = itemId;
+    this.itemName = itemName;
+    this.itemPrice = itemPrice;
+    this.itemQuantity = itemQuantity;
+    this.itemLink = itemLink;
+    this.itemDescription = itemDescription;
+    this.itemReservedStatus = itemReservedStatus;
+    this.itemReservedName = itemReservedName;
+    this.itemWishlistId = itemWishlistId;
+  }
 
-    // Gettere og settere
-    public int getId() {
-      return itemId;
-    }
-    public void setId(int id) {
-      this.itemId = id;
-    }
+  public int getItemId() {
+    return itemId;
+  }
+
+  public void setItemId(int itemId) {
+    this.itemId = itemId;
+  }
 
   public String getItemName() {
     return itemName;
   }
 
-  public void setItemName(String name) {
-    this.itemName = name;
+  public void setItemName(String itemName) {
+    this.itemName = itemName;
   }
 
-    public String getItemLastname() {
-      return itemLastname;
-    }
+  public double getItemPrice() {
+    return itemPrice;
+  }
 
-    public void setItemLastname(String itemLastname) {
-      this.itemLastname = itemLastname;
-    }
+  public void setItemPrice(double itemPrice) {
+    this.itemPrice = itemPrice;
+  }
 
-    public double getItemPrice() {
-      return itemPrice;
-    }
-
-    public void setItemPrice(double itemPrice) {
-      this.itemPrice = itemPrice;
-    }
-
-    public String getItemDescription() {
-      return itemDescription;
-    }
-
-    public void setItemDescription(String itemDescription) {
-      this.itemDescription = itemDescription;
-    }
-
-    public String getItemLink() {
-      return itemLink;
-    }
-
-    public void setItemLink(String itemLink) {
-      this.itemLink = itemLink;
-    }
-
-    public boolean isItemReservedstatus() {
-      return itemReservedstatus;
-    }
-
-    public void setItemReservedstatus(boolean itemReservedstatus) {
-      this.itemReservedstatus = itemReservedstatus;
-    }
-
-    public int getItemWishlistid() {
-      return itemWishlistid;
-    }
-
-    public void setItemWishlistid(int itemWishlistid) {
-      this.itemWishlistid = itemWishlistid;
-    }
   public int getItemQuantity() {
     return itemQuantity;
   }
+
   public void setItemQuantity(int itemQuantity) {
     this.itemQuantity = itemQuantity;
   }
 
+  public String getItemLink() {
+    return itemLink;
   }
+
+  public void setItemLink(String itemLink) {
+    this.itemLink = itemLink;
+  }
+
+  public String getItemDescription() {
+    return itemDescription;
+  }
+
+  public void setItemDescription(String itemDescription) {
+    this.itemDescription = itemDescription;
+  }
+
+  public boolean isItemReservedStatus() {
+    return itemReservedStatus;
+  }
+
+  public void setItemReservedStatus(boolean itemReservedStatus) {
+    this.itemReservedStatus = itemReservedStatus;
+  }
+
+  public String getItemReservedName() {
+    return itemReservedName;
+  }
+
+  public void setItemReservedName(String itemReservedName) {
+    this.itemReservedName = itemReservedName;
+  }
+
+  public int getItemWishlistId() {
+    return itemWishlistId;
+  }
+
+  public void setItemWishlistId(int itemWishlistId) {
+    this.itemWishlistId = itemWishlistId;
+  }
+
+  @Override
+  public String toString() {
+    return "Item{" +
+            "itemId=" + itemId +
+            ", itemName='" + itemName + '\'' +
+            ", itemPrice=" + itemPrice +
+            ", itemQuantity=" + itemQuantity +
+            ", itemLink='" + itemLink + '\'' +
+            ", itemDescription='" + itemDescription + '\'' +
+            ", itemReservedStatus=" + itemReservedStatus +
+            ", itemReservedName='" + itemReservedName + '\'' +
+            ", itemWishlistId=" + itemWishlistId +
+            '}';
+  }
+}
 
 

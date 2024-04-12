@@ -102,6 +102,7 @@ public class UserController {
 
         userService.updateUser(user);
         session.setAttribute("loggedInUser", user);
+
         return "redirect:/welcome";
     }
 

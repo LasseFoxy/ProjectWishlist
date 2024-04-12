@@ -6,30 +6,38 @@
     <link th:href="@{/css/wishlistItems.css}" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <h1>Tilføj Ønske til Ønskeliste</h1>
-    <hr>
-    <div class="wishlist-info">
-        <!-- Viser information om ønskelisten -->
-        <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
-        <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
-        <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
-    </div>
-    <!-- Mulighed for at tilføje flere ønsker til ønskelisten -->
-    <a th:href="@{/wishlist/addNewItem}" class="btn">Tilføj Ønske</a>
+<div th:replace="~{/header :: header}"></div>
 
-    <!-- Her vil der kunne vises en liste af items i ønskelisten. Den skal rettes til når item er lavet
-    <div class="wishlist-items">
-        <h2>Items i Ønskeliste</h2>
-        <ul>
-            <li th:each="item : ${wishlistItems}">
-                <p><strong>Item Navn:</strong> <span th:text="${item.itemName}">Item navn</span></p>
-                <p><strong>Beskrivelse:</strong> <span th:text="${item.itemDescription}">Beskrivelse</span></p>
+<div class="content">
+    <div class="container">
+        <h1>Tilføj Ønske til Ønskeliste</h1>
+        <hr>
+        <div class="wishlist-info">
+            <!-- Viser information om ønskelisten -->
+            <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
+            <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
+            <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
+        </div>
 
-            </li>
-        </ul>
+        <div class="buttons">
+        <a th:href="@{/wishlist/addItem}" class="btn">Tilføj Ønske</a>
+        </div>
+
+        <div class="wishlist-items">
+            <h2>Items i Ønskeliste</h2>
+            <ul>
+                <li th:each="item : ${wishlistItems}">
+                    <div class="item-info">
+                        <p><strong>Item Navn:</strong> <span th:text="${item.itemName}">Item navn</span></p>
+                        <p><strong>Pris:</strong> <span th:text="${item.itemPrice}">Pris</span></p>
+                        <p><strong>Antal:</strong> <span th:text="${item.itemQuantity}">Antal</span></p>
+                        <p><strong>Reserveret:</strong> <span th:text="${item.itemReservedStatus}">Reserveret</span></p>
+                        <p><strong>Reserveret Navn:</strong> <span th:text="${item.itemReservedName}">Reserveret Navn</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    -->
 </div>
 </body>
 </html>

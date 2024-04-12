@@ -7,9 +7,11 @@ body {
 
 .content {
     margin-top: 100px;
+    text-align: center;
 }
 
 .container {
+    min-width: 60vw;
     background-color: white;
     padding: 20px;
     margin: auto;

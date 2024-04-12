@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Opret Ønskeliste</title>
     <link th:href="@{/css/createWishlist-style.css}" rel="stylesheet">
-
+</head>
 <body>
 <div th:replace="~{/header :: header}"></div>
 
@@ -13,12 +13,16 @@
     <p>Brugerens ID: <span th:text="${loggedInUserId}"></span></p>
     <form th:action="@{/wishlist/create}" method="post" th:object="${wishlist}">
         <input type="hidden" th:name="userId" th:value="${loggedInUserId}" />
+
         <label for="name">Navn på ønskeliste:</label>
         <input type="text" id="name" name="name" th:field="*{wishlistName}" required>
+
         <label for="deadline">Deadline (valgfri):</label>
         <input type="date" id="deadline" name="deadline" th:field="*{wishlistDeadlineDate}">
+
         <label for="wishlistDescription">Beskrivelse (valgfri):</label>
         <textarea id="wishlistDescription" name="wishlistDescription" th:field="*{wishlistDescription}"></textarea>
+
         <button type="submit" class="btn">Opret</button> <!-- Omdøbt til btn -->
     </form>
     <a th:href="@{/welcome}" class="btn">Tilbage til Velkomstsiden</a> <!-- Omdøbt til btn -->
