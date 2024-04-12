@@ -41,6 +41,27 @@ public class WishlistController {
         }
     }
 
+    @GetMapping("/wishlist/edit/{wishlistId}")
+    public String showEditWishlistForm(@PathVariable int wishlistId, Model model, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
+
+        if (loggedInUser != null && wishlist != null && wishlist.getUserId() == loggedInUser.getUserId()) {
+            model.addAttribute("wishlist", wishlist);
+            return "updateWishlist"; // Navnet på din HTML-fil til visning/redigering af ønskesedlen
+        } else {
+            return "redirect:/welcome"; // Eller en anden side, hvis brugeren ikke har adgang til ønskesedlen
+        }
+    }
+
+    @PostMapping("/wishlist/update/{wishlistId}")
+    public String updateWishlist(@PathVariable int wishlistId, @ModelAttribute Wishlist wishlist) {
+        wishlist.setWishlistId(wishlistId);
+        wishlistService.update(wishlist);
+        return "redirect:/welcome";
+    }
+
+
     @GetMapping("/wishlist/wishlistItems")
     public String showAddItemForm(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
