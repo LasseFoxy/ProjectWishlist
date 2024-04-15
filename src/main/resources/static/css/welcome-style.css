@@ -1,49 +1,140 @@
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f0e6ff;
+    margin: 0;
+    padding: 20px;
+}
+
+.content {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.container {
+    background-color: white;
+    margin: auto;
+    width: 51.20vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6vw;
+    padding-bottom: 10px;
+}
+
 h1, h2 {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    font-size: 3vw;
+    font-weight: bold;
+    margin-bottom: 2vw;
+    border-bottom: 0.1vw solid #ccc;
+    max-width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    font-size: 2vw;
+    border-bottom: 0;
+    margin-bottom: 0.5vw;
+}
+
+.header {
+    padding-top: 10px;
     text-align: center;
 }
 
-.section {
+.button-container {
     margin-bottom: 20px;
-
 }
 
-ul {
-    list-style-type: none;
+.wishlist-name {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1vw;
+    margin-left: 2vw;
 }
 
-li {
-    margin-bottom: 5px;
-}
-
-li a {
-    text-decoration: none;
-    color: blue;
-}
-
-li a:hover {
-    text-decoration: underline;
-    color: darkblue;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center; /* Centrerer knapperne vandret */
-    margin-top: 20px; /* Juster afstanden mellem sektioner */
-}
-
-.btn {
+.main-button, .wishlist-button, .secondary-button {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1vw;
     display: inline-block;
-    padding: 8px 16px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #007bff;
-    color: white;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #af67dc, #be74ed);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #ffffff;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.6vw;
     text-decoration: none;
 }
 
-.btn:hover {
+.main-button{
+    font-size: 20px;
+    padding: 20px 30px;
+}
+
+.main-button:hover, .wishlist-button:hover, .secondary-button:hover {
     background-color: #0056b3;
 }
 
+.wishlist-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 1vw;
+}
+
+.wishlist-section{
+    margin-top: 3vw;
+}
+
+.wishlist-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.wishlist-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 2vw;
+}
+
+
+.user-info-section {
+    margin-top: 40px;
+}
+
+.user-info {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.profile-button-container {
+    margin-top: 20px;
+}
+
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wishlist-table th,
+.wishlist-table td {
+    padding: 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+.wishlist-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.wishlist-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.wishlist-button {
+    margin-right: 10px;
+}

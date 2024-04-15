@@ -13,7 +13,7 @@ body {
     background-color: white;
     padding: 10px;
     margin: auto;
-    width: 50%;
+    width: 50vw;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
@@ -40,15 +40,18 @@ label {
 
 input[type="text"],
 input[type="number"],
-textarea,
-input[type="url"] {
+input[type="url"],
+input[type="password"],
+textarea
+{
     width: 100%;
     padding: 0.8vw;
     border: 0.1vw solid #ccc;
-    border-radius: 0.4vw;
+    border-radius: 0.6vw;
     box-sizing: border-box;
 }
 button[type="submit"], .home-link {
+    font-family: Arial, sans-serif;
     width: 30%;
     padding: 1vw 2vw;
     background: linear-gradient(to bottom, #af67dc, #be74ed);
