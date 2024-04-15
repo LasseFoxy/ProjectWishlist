@@ -27,6 +27,7 @@
 <div class="content">
   <div class="container">
     <h1>Log In For At Se Ønskelisten</h1>
+    <p th:text="${loginError}" style="color: red;"></p>
     <form th:action="${wishlist_id}" method="post">
       <input type="hidden" name="wishlist_id"/>
       <div class="form-group">
@@ -38,7 +39,6 @@
         <input type="password" id="password" name="password" required />
       </div>
       <button type="submit" class="btn">Login</button>
-      <p th:if="${loginError}" th:text="${loginError}" style="color: red;"></p>
     </form>
     <form class="registerUserButton" th:action="@{'/wishlist/share/register/' + ${wishlist_id}}">
       <button type="submit" class="btn" >Opret Bruger For At Se Ønskelisten</button>

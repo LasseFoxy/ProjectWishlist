@@ -136,20 +136,24 @@ public class WishlistController {
     @GetMapping("/wishlist/share/login/{wishlist_id}")
     public String loginShare(Model model, @PathVariable int wishlist_id){
         model.addAttribute("wishlist_id", wishlist_id);
+        Wishlist wishlist = wishlistService.getWishlistById(wishlist_id);
+        if (wishlist == null) {
+            model.addAttribute("loginError", "Ønskeliste findes ikke.");
+        }
         return "shareLogin";
     }
 
     @PostMapping("/wishlist/share/login/{wishlist_id}")
     public String loginShare(@RequestParam String username, @RequestParam String password,@PathVariable String wishlist_id, HttpSession session, Model model, @ModelAttribute Wishlist wishlist) {
         User loggedInUser = userService.validateUser(username, password);
-        if (loggedInUser != null) {
+         if (loggedInUser != null) {
             session.setAttribute("loggedInUser", loggedInUser);
             String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
             return "redirect:" + link;
         } else {
             System.out.println("Going to welcome");
-            model.addAttribute("loginError", "Forkert bruger eller adgangskode");
-            return "login";
+            model.addAttribute("loginError", "Brugernavn eller Kodeord er forkert.");
+            return "shareLogin";
         }
     }
 
