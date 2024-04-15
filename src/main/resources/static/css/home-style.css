@@ -1,6 +1,7 @@
-h1 {
-    color: black;
-    margin-bottom: 20px; /* Tilføjer lidt plads under overskriften */
+.frontpage-background{
+    background-image: url("../images/frontpage-background.webp");
+    background-color: #f0e6ff;
+    background-size:cover;
 }
 
 .links-container {
@@ -8,21 +9,8 @@ h1 {
     justify-content: center;
 }
 
-.home-link {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 20px;
-    background-color: #af67dc; /* En mørkere nuance af lilla */
-    color: white;
-    text-decoration: none;
-    border-radius: 20px; /* Runde hjørner */
-    width: 150px; /* Ensartet bredde */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjer en let skygge for dybde */
-}
 
-.home-link:hover {
-    background-color: #7a1be0; /* En endnu mørkere nuance for hover effekt */
+.frontpage-headline {
+    color: #f5f5f5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Skyggeeffekt for at give en kant */
 }

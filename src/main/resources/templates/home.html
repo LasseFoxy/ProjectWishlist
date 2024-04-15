@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Velkommen</title>
-    <link rel="stylesheet" th:href="@{/css/home-style.css}"/>
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/home-style.css}" rel="stylesheet"/>
 </head>
-<body>
+
+<body class="frontpage-background">
+
 <div th:replace="~{/header :: header}"></div>
 
 <div class="content">
-    <div class="container">
-        <h1>Velkommen til DrømmeListen!</h1>
-        <div class="links-container"> <!-- Container for links, arrangeret side om side -->
+    <div class="container transparent-container">
+        <h1 class="frontpage-headline"> Velkommen til DrømmeListen!</h1>
+        <div class="links-container">
             <a th:href="@{/user/login}" class="home-link">Login</a>
             <a th:href="@{/user/register}" class="home-link">Opret Bruger</a>
         </div>

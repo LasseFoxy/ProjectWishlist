@@ -7,8 +7,9 @@
 
     <div class="header-container">
         <div class="left">
-            <a th:href="@{/welcome}">
-                <img th:src="@{/images/header/home-button.png}" alt="Home">
+            <!-- Betinget link baseret på om brugeren er logget ind -->
+            <a th:href="${session.loggedInUser != null ? '/welcome' : '/'}">
+                <img th:src="@{/images/home-button.png}" alt="Home">
             </a>
             <span class="header-text">ØNSKELISTEN</span>
         </div>

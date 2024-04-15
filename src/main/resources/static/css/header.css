@@ -19,7 +19,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to right, #af67dc, #be74ed, #ab72f3);
+    background: linear-gradient(to bottom, #af67dc, #be74ed);
 
 }
 
