@@ -18,7 +18,8 @@
         </div>
         <div class="form-group">
             <label for="wishlistDeadlineDate">Deadline dato:</label>
-            <input type="date" id="wishlistDeadlineDate" th:field="*{wishlistDeadlineDate}" />
+            <input type="date" id="wishlistDeadlineDate" th:value="${wishlist.wishlistDeadlineDate}" name="newDeadlineDate"/>
+
         </div>
         <div class="form-group">
             <label for="wishlistDescription">Beskrivelse:</label>
@@ -27,11 +28,12 @@
         <button type="submit" class="btn">Gem</button>
     </form>
 
-    <!-- Tilføj kode til at vise og redigere elementer i ønskelisten -->
+
 
     <div class="buttons">
         <a th:href="@{/welcome}" class="btn">Tilbage til Velkommen</a>
     </div>
 </div>
+
 </body>
 </html>

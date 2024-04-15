@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -69,8 +70,9 @@ public class WishlistController {
             return "redirect:/user/login";
         }
     }
+
     @GetMapping("/wishlist/edit/{wishlistId}")
-    public String showEditWishlistForm(@PathVariable int wishlistId, Model model, HttpSession session) {
+    public String showUpdateWishlistForm(@PathVariable int wishlistId, Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         Wishlist wishlist = wishlistService.getWishlistById(wishlistId);
 
@@ -78,14 +80,19 @@ public class WishlistController {
             model.addAttribute("wishlist", wishlist);
             return "updateWishlist"; // Navnet på vores HTML-fil til visning/redigering af ønskesedlen
         } else {
-            return "redirect:/welcome"; // Eller en anden side, hvis brugeren ikke har adgang til ønskesedlen
+            return "redirect:/welcome";
         }
     }
 
+
     @PostMapping("/wishlist/update/{wishlistId}")
-    public String updateWishlist(@PathVariable int wishlistId, @ModelAttribute Wishlist wishlist) {
-        wishlist.setWishlistId(wishlistId);
-        wishlistService.update(wishlist);
+    public String updateWishlist(@PathVariable int wishlistId, @ModelAttribute Wishlist wishlist, @RequestParam("newDeadlineDate") LocalDate newDeadlineDate) {
+        Wishlist originalWishlist = wishlistService.getWishlistById(wishlistId);
+        // Tjekker om wishlistDeadlineDate er ændret
+        if (!newDeadlineDate.equals(originalWishlist.getWishlistDeadlineDate())) {
+            wishlist.setWishlistDeadlineDate(newDeadlineDate);
+            wishlistService.update(wishlist);
+        }
         return "redirect:/welcome";
     }
 
@@ -107,6 +114,5 @@ public class WishlistController {
         }
 
     }
-
 
 }
