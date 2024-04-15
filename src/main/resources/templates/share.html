@@ -22,7 +22,7 @@
         <ul>
             <h3>Ikke Reserverede Ønsker</h3>
             <li th:each="item : ${wishlistItems}">
-                <form th:if="${!item.itemReservedStatus}" th:action="@{'/wishlist/share/'}" method="post">
+                <form th:if="${!item.itemReservedStatus}" th:action="@{'/wishlist/share/' + ${wishlist.wishlistId}}" method="post">
                     <input type="hidden" name="itemId" th:value="${item.itemId}" />
                     <input type="hidden" name="wishlistId" th:value="${item.itemWishlistId}" />
                     <p>Item Navn:<span th:text="${item.itemName}">Item navn</span></p>
