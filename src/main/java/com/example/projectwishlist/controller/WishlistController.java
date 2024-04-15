@@ -133,10 +133,16 @@ public class WishlistController {
 
     @GetMapping("/wishlist/share/login/{wishlist_id}")
     public String loginShare(Model model, @PathVariable String wishlist_id){
+        boolean numbersOnly = wishlist_id.matches("[0-9]+");
+        if (!numbersOnly){
+            model.addAttribute("wishlistError", "Delings URL Må Kun Indeholde Tal Efter .../share/");
+            return "login";
+        }
         model.addAttribute("wishlist_id", wishlist_id);
         Wishlist wishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
-        if (wishlist == null) {
+            if (wishlist == null) {
             model.addAttribute("loginError", "Ønskeliste findes ikke.");
+            return "login";
         }
         return "shareLogin";
     }
@@ -148,7 +154,7 @@ public class WishlistController {
             session.setAttribute("loggedInUser", loggedInUser);
             String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
             return "redirect:" + link;
-        } else {
+        }  else {
             model.addAttribute("loginError", "Brugernavn eller Kodeord er forkert.");
             return "shareLogin";
         }
