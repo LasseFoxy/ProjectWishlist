@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +29,24 @@ public class ItemRepository {
       return null;
     }
   }
+
+  public Item findByItemId(int itemId){
+    String sql = "SELECT * FROM items where item_id = ?";
+    try {
+      return jdbcTemplate.queryForObject(sql, new Object[]{itemId}, new BeanPropertyRowMapper<>(Item.class));
+    } catch (EmptyResultDataAccessException e ){
+      return null;
+    }
+  }
+
+  public Boolean isItemReserved(int itemId){
+    String sql = "SELECT item_reserved_status FROM items WHERE item_id=?";
+    return jdbcTemplate.queryForObject(sql, Boolean.class, itemId);
+  }
+
+  public void toggleReservationStatus(Item item){
+    String sql = "UPDATE items SET item_reserved_status = ?, item_reserved_name = ? WHERE item_id = ?";
+    jdbcTemplate.update(sql, item.isItemReservedStatus(), item.getItemReservedName(), item.getItemId());
+  }
+
 }

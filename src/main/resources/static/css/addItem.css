@@ -1,38 +1,55 @@
-.form-group {
-  margin-bottom: 20px;
+body{
+  background-color: #f0e6ff;
 }
-
+.content {
+  margin-top: 90px;
+}
+.container {
+  background-color: white;
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+h1 {
+  text-align: center;
+  font-size: 3vw;
+  font-weight: bold;
+  margin-bottom: 2vw;
+  border-bottom: 0.1vw solid #ccc;
+}
+hr {
+  border: 0.2vw solid #ccc;
+  margin-bottom: 2vw;
+}
+.form-group {
+  margin-bottom: 1.5vw;
+}
 label {
   display: block;
+  margin-bottom: 0.5vw;
   font-weight: bold;
 }
-
 input[type="text"],
 input[type="number"],
-select,
-textarea {
-  width: 80%;
-  padding: 10px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-}
-
-textarea {
-  height: 100px;
-}
-
-button {
-  display: block;
+textarea,
+input[type="url"] {
   width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  padding: 0.8vw;
+  border: 0.1vw solid #ccc;
+  border-radius: 0.4vw;
+  box-sizing: border-box;
 }
-
-button:hover {
+button[type="submit"] {
+  width: 30%;
+  padding: 1vw 2vw;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.4vw;
+  cursor: pointer;
+}
+button[type="submit"]:hover {
   background-color: #0056b3;
 }

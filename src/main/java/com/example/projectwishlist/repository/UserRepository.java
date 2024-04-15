@@ -27,8 +27,8 @@ public class UserRepository {
         }
     }
 
-    public User findById(Long userId) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+    public User findById(int userId) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(User.class));
         } catch (EmptyResultDataAccessException e) {
@@ -45,5 +45,16 @@ public class UserRepository {
             sql = "UPDATE users SET firstname = ?, lastname = ?, email = ?, username = ? WHERE user_id = ?";
             jdbcTemplate.update(sql, user.getFirstname(), user.getLastname(), user.getEmail(), user.getUsername(), user.getUserId());
         }
+    }
+
+    public User getUserFirstName(int userId){
+        String sql = "SELECT firstname FROM users WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(User.class));
+    }
+
+
+    public User getUserLastName(int userId){
+        String sql = "SELECT lastname FROM users WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(User.class));
     }
 }

@@ -104,17 +104,15 @@ public class Item {
   @Override
   public String toString() {
     return "Item{" +
-            "itemId=" + itemId +
-            ", itemName='" + itemName + '\'' +
-            ", itemPrice=" + itemPrice +
-            ", itemQuantity=" + itemQuantity +
-            ", itemLink='" + itemLink + '\'' +
-            ", itemDescription='" + itemDescription + '\'' +
-            ", itemReservedStatus=" + itemReservedStatus +
-            ", itemReservedName='" + itemReservedName + '\'' +
-            ", itemWishlistId=" + itemWishlistId +
-            '}';
+      "itemId=" + itemId +
+      ", itemName='" + itemName + '\'' +
+      ", itemPrice=" + itemPrice +
+      ", itemQuantity=" + itemQuantity +
+      ", itemLink='" + itemLink + '\'' +
+      ", itemDescription='" + itemDescription + '\'' +
+      ", itemReservedStatus=" + itemReservedStatus +
+      ", itemReservedName='" + itemReservedName + '\'' +
+      ", itemWishlistId=" + itemWishlistId +
+      '}';
   }
 }
-
-

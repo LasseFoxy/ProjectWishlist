@@ -13,6 +13,7 @@
     <div class="container">
         <h1>Login</h1>
         <form th:action="@{/user/login}" method="post">
+
             <div class="form-group">
                 <label for="username">Brugernavn:</label>
                 <input type="text" id="username" name="username" required />
@@ -24,6 +25,7 @@
             <button type="submit" class="btn">Login</button>
 
             <p th:if="${loginError}" th:text="${loginError}" style="color: red;"></p>
+            <p th:text="${wishlistError}" style="color: red;"></p>
         </form>
     </div>
 </div>

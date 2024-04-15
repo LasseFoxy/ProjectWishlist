@@ -4,11 +4,14 @@ import com.example.projectwishlist.model.Item;
 import com.example.projectwishlist.model.User;
 import com.example.projectwishlist.model.Wishlist;
 import com.example.projectwishlist.service.ItemService;
+import com.example.projectwishlist.service.UserService;
 import com.example.projectwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,10 +21,12 @@ public class WishlistController {
 
     private final WishlistService wishlistService;
     private final ItemService itemService;
+    private final UserService userService;
 
-    public WishlistController(WishlistService wishlistService, ItemService itemService) {
+    public WishlistController(WishlistService wishlistService, ItemService itemService, UserService userService) {
         this.wishlistService = wishlistService;
         this.itemService = itemService;
+        this.userService = userService;
     }
 
     @GetMapping("/wishlist/create")
@@ -97,22 +102,86 @@ public class WishlistController {
     }
 
     @GetMapping("/wishlist/share/{wishlist_id}")
-    public String shareWishlist(@PathVariable int wishlist_id, Model model, HttpSession session){
+    public String shareWishlist(@PathVariable String wishlist_id, Model model, HttpSession session){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Wishlist selectedWishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
+        model.addAttribute("wishlist", selectedWishlist);
         if (loggedInUser != null){
-            Wishlist selectedWishlist = wishlistService.getWishlistById(wishlist_id);
             String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
-            String linkToCopy = link;
-            model.addAttribute("shareLink", linkToCopy);
-            model.addAttribute("wishlist", selectedWishlist);
+            model.addAttribute("shareLink", link);
             List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
             model.addAttribute("wishlist", selectedWishlist);
             model.addAttribute("wishlistItems", wishlistItems);
             return "share";
         } else {
-            return "redirect:/welcome";
+            return "redirect:/wishlist/share/login/" + wishlist_id;
         }
 
     }
+
+    @PostMapping("/wishlist/share/{wishlist_id}")
+    public String reserveItem(@ModelAttribute Item item,@PathVariable String wishlist_id, HttpSession session, Model model){
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        Wishlist selectedWishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
+        item.setItemWishlistId(wishlistService.findWishListByItemID(item.getItemId()).getWishlistId());
+        if (loggedInUser != null) {
+            item.setItemReservedName(userService.getUserById(loggedInUser.getUserId()).getFirstname() + " " + userService.getUserById(loggedInUser.getUserId()).getLastname());
+            item.setItemReservedStatus(true);
+            itemService.toggleReservationStatus(item);
+            List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
+            model.addAttribute("wishlist", selectedWishlist);
+            model.addAttribute("wishlistItems", wishlistItems);
+            return "share";
+        } else {
+            model.addAttribute("wishlist", selectedWishlist);
+            return "redirect:/shareLogin";
+        }
+    }
+
+    @GetMapping("/wishlist/share/login/{wishlist_id}")
+    public String loginShare(Model model, @PathVariable String wishlist_id){
+        boolean numbersOnly = wishlist_id.matches("[0-9]+");
+        if (!numbersOnly){
+            model.addAttribute("wishlistError", "Delings URL Må Kun Indeholde Tal Efter .../share/");
+            return "login";
+        }
+        model.addAttribute("wishlist_id", wishlist_id);
+        Wishlist wishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
+            if (wishlist == null) {
+            model.addAttribute("loginError", "Ønskeliste findes ikke.");
+            return "login";
+        }
+        return "shareLogin";
+    }
+
+    @PostMapping("/wishlist/share/login/{wishlist_id}")
+    public String loginShare(@RequestParam String username, @RequestParam String password,@PathVariable String wishlist_id, HttpSession session, Model model, @ModelAttribute Wishlist wishlist) {
+        User loggedInUser = userService.validateUser(username, password);
+         if (loggedInUser != null) {
+            session.setAttribute("loggedInUser", loggedInUser);
+            String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+            return "redirect:" + link;
+        }  else {
+            model.addAttribute("loginError", "Brugernavn eller Kodeord er forkert.");
+            return "shareLogin";
+        }
+    }
+
+    @GetMapping("/wishlist/share/register/{wishlist_id}")
+    public String registerShare(Model model, @PathVariable String wishlist_id){
+        model.addAttribute("wishlist_id", wishlist_id);
+        model.addAttribute("user", new User());
+        return "shareRegister";
+    }
+
+    @PostMapping("/wishlist/share/register/{wishlist_id}")
+    public String registerShare(@PathVariable String wishlist_id, @ModelAttribute User user, HttpSession session){
+        userService.save(user);
+        session.setAttribute("loggedInUser", user);
+        String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+        return "redirect:" + link;
+    }
+
+
 
 }

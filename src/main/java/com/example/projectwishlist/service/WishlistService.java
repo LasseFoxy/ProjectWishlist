@@ -32,4 +32,8 @@ public class WishlistService {
     public void delete(int wishlistId) {
         wishlistRepository.delete(wishlistId);
     }
+
+    public Wishlist findWishListByItemID(int itemId){
+        return wishlistRepository.findWishListByItemID(itemId);
+    }
 }
