@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ønskelisten</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/registerAndProfile-style.css}" rel="stylesheet">
+  </head>
+  <div class="header-container">
+    <div class="left">
+      <a th:href="@{/welcome}">
+        <img th:src="@{/images/header/home-button.png}" alt="Home">
+      </a>
+      <span class="header-text">ØNSKELISTEN</span>
+    </div>
+  </div>
+  <body>
+<div class="content">
+  <div class="container">
+    <h1>Opret Bruger</h1>
+    <form th:action="@{'/wishlist/share/register/' + ${wishlist_id}}" th:object="${user}" method="post">
+      <input type="hidden" name="wishlist_id"/>
+      <div class="form-group">
+        <label for="firstname">Fornavn:</label>
+        <input type="text" id="firstname" th:field="*{firstname}" required />
+      </div>
+      <div class="form-group">
+        <label for="lastname">Efternavn:</label>
+        <input type="text" id="lastname" th:field="*{lastname}" required />
+      </div>
+      <div class="form-group">
+        <label for="username">Brugernavn:</label>
+        <input type="text" id="username" th:field="*{username}" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required />
+      </div>
+      <button type="submit" class="btn">Opret Bruger</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

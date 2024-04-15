@@ -31,3 +31,10 @@ button.btn {
 button.btn:hover {
     background-color: #0056b3;
 }
+
+a:link, a:visited {
+    margin: 0;
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+}

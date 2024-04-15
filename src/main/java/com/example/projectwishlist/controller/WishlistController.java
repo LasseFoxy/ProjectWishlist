@@ -7,6 +7,7 @@ import com.example.projectwishlist.service.ItemService;
 import com.example.projectwishlist.service.UserService;
 import com.example.projectwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,10 +95,10 @@ public class WishlistController {
     }
 
     @GetMapping("/wishlist/share/{wishlist_id}")
-    public String shareWishlist(@PathVariable int wishlist_id, Model model, HttpSession session){
+    public String shareWishlist(@PathVariable String wishlist_id, Model model, HttpSession session){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null){
-            Wishlist selectedWishlist = wishlistService.getWishlistById(wishlist_id);
+            Wishlist selectedWishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
             String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
             model.addAttribute("shareLink", link);
             model.addAttribute("wishlist", selectedWishlist);
@@ -106,7 +107,8 @@ public class WishlistController {
             model.addAttribute("wishlistItems", wishlistItems);
             return "share";
         } else {
-            return "redirect:/welcome";
+
+            return "redirect:/wishlist/share/login/" + wishlist_id;
         }
 
     }
@@ -115,21 +117,58 @@ public class WishlistController {
     public String reserveItem(@ModelAttribute Item item, HttpSession session, Model model){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         itemService.findItemByID(item.getItemId());
+        Wishlist selectedWishlist = wishlistService.getWishlistById(item.getItemWishlistId());
         item.setItemWishlistId(wishlistService.findWishListByItemID(item.getItemId()).getWishlistId());
         if (loggedInUser != null) {
-            System.out.println(item.getItemWishlistId());
             item.setItemReservedName(userService.getUserById(loggedInUser.getUserId()).getFirstname() + " " + userService.getUserById(loggedInUser.getUserId()).getLastname());
             item.setItemReservedStatus(true);
             itemService.toggleReservationStatus(item);
-            Wishlist selectedWishlist = wishlistService.getWishlistById(item.getItemWishlistId());
             List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
             model.addAttribute("wishlist", selectedWishlist);
             model.addAttribute("wishlistItems", wishlistItems);
             return "share";
         } else {
-            return "redirect:/welcome";
+            model.addAttribute("wishlist", selectedWishlist);
+            return "redirect:/shareLogin";
         }
     }
+
+    @GetMapping("/wishlist/share/login/{wishlist_id}")
+    public String loginShare(Model model, @PathVariable int wishlist_id){
+        model.addAttribute("wishlist_id", wishlist_id);
+        return "shareLogin";
+    }
+
+    @PostMapping("/wishlist/share/login/{wishlist_id}")
+    public String loginShare(@RequestParam String username, @RequestParam String password,@PathVariable String wishlist_id, HttpSession session, Model model, @ModelAttribute Wishlist wishlist) {
+        User loggedInUser = userService.validateUser(username, password);
+        if (loggedInUser != null) {
+            session.setAttribute("loggedInUser", loggedInUser);
+            String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+            return "redirect:" + link;
+        } else {
+            System.out.println("Going to welcome");
+            model.addAttribute("loginError", "Forkert bruger eller adgangskode");
+            return "login";
+        }
+    }
+
+    @GetMapping("/wishlist/share/register/{wishlist_id}")
+    public String registerShare(Model model, @PathVariable String wishlist_id){
+        model.addAttribute("wishlist_id", wishlist_id);
+        model.addAttribute("user", new User());
+        return "shareRegister";
+    }
+
+    @PostMapping("/wishlist/share/register/{wishlist_id}")
+    public String registerShare(@PathVariable String wishlist_id, @ModelAttribute User user, HttpSession session){
+        userService.save(user);
+        session.setAttribute("loggedInUser", user);
+        System.out.println(wishlist_id);
+        String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+        return "redirect:" + link;
+    }
+
 
 
 }

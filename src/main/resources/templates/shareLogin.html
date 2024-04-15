@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link th:href="@{/css/login-style.css}" rel="stylesheet">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="header">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ønskelisten</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+  </head>
+
+  <div class="header-container">
+    <div class="left">
+      <a th:href="@{/welcome}">
+        <img th:src="@{/images/header/home-button.png}" alt="Home">
+      </a>
+      <span class="header-text">ØNSKELISTEN</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="container">
+    <h1>Log In For At Se Ønskelisten</h1>
+    <form th:action="${wishlist_id}" method="post">
+      <input type="hidden" name="wishlist_id"/>
+      <div class="form-group">
+        <label for="username">Brugernavn:</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p th:if="${loginError}" th:text="${loginError}" style="color: red;"></p>
+    </form>
+    <form class="registerUserButton" th:action="@{'/wishlist/share/register/' + ${wishlist_id}}">
+      <button type="submit" class="btn" >Opret Bruger For At Se Ønskelisten</button>
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
