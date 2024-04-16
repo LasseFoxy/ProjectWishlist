@@ -93,6 +93,7 @@ public class WishlistController {
     @PostMapping("/wishlist/update/{wishlistId}")
     public String updateWishlist(@PathVariable int wishlistId, @ModelAttribute Wishlist wishlist, @RequestParam("newDeadlineDate") LocalDate newDeadlineDate) {
         Wishlist originalWishlist = wishlistService.getWishlistById(wishlistId);
+
         // Tjekker om wishlistDeadlineDate er ændret
         if (!newDeadlineDate.equals(originalWishlist.getWishlistDeadlineDate())) {
             wishlist.setWishlistDeadlineDate(newDeadlineDate);
@@ -100,6 +101,12 @@ public class WishlistController {
         }
         return "redirect:/welcome";
     }
+    @PostMapping("/wishlist/delete/{wishlistId}")
+    public String deleteWishlist(@PathVariable int wishlistId) {
+        wishlistService.delete(wishlistId);
+        return "redirect:/welcome";
+    }
+
 
     @GetMapping("/wishlist/share/{wishlist_id}")
     public String shareWishlist(@PathVariable String wishlist_id, Model model, HttpSession session){

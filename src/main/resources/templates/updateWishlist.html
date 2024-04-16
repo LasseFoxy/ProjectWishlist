@@ -27,7 +27,10 @@
         </div>
         <button type="submit" class="btn">Gem</button>
     </form>
-
+    <form th:action="@{/wishlist/delete/{wishlistId}(wishlistId=${wishlist.wishlistId})}" method="post">
+        <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
+        <button type="submit" class="btn btn-danger">Slet Ønskeliste</button>
+    </form>
 
 
     <div class="buttons">
