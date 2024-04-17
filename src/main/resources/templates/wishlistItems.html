@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Ønske til Ønskeliste</title>
-    <link th:href="@{/css/wishlistItems.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/wishlistItems-style.css}" rel="stylesheet">
 </head>
+
 <body>
 <div th:replace="~{/header :: header}"></div>
 
 <div class="content">
     <div class="container">
-        <h1>Tilføj Ønske til Ønskeliste</h1>
-        <hr>
+        <h1 th:text="${wishlist.wishlistName}">Navn på Ønskeliste</h1>
+
         <div class="wishlist-info">
-            <!-- Viser information om ønskelisten -->
-            <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
-            <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
             <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
-            <button onclick="copyLink()">Del Ønskeliste</button>
+
+            <button class="button button-custom" onclick="copyLink()">Del Ønskeliste</button>
             <script>
                 function copyLink() {
                     var linkToCopy = document.getElementById("shareLink").innerText;
@@ -33,23 +33,32 @@
             <p id="shareLink" th:text="${shareLink}" style="display: none;"></p>
         </div>
 
+        <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
+        <br> <br> <br>
         <div class="buttons">
-        <a th:href="@{/wishlist/addItem}" class="btn">Tilføj Ønske</a>
+            <a class="button button-special" th:href="@{/wishlist/addItem}" >Tilføj Ønske</a>
         </div>
 
         <div class="wishlist-items">
-            <h2>Items i Ønskeliste</h2>
-            <ul>
-                <li th:each="item : ${wishlistItems}">
-                    <div class="item-info">
-                        <p><strong>Item Navn:</strong> <span th:text="${item.itemName}">Item navn</span></p>
-                        <p><strong>Pris:</strong> <span th:text="${item.itemPrice}">Pris</span></p>
-                        <p><strong>Antal:</strong> <span th:text="${item.itemQuantity}">Antal</span></p>
-                        <p><strong>Reserveret:</strong> <span th:text="${item.itemReservedStatus}">Reserveret</span></p>
-                        <p><strong>Reserveret Navn:</strong> <span th:text="${item.itemReservedName}">Reserveret Navn</span></p>
-                    </div>
-                </li>
-            </ul>
+            <h2>Ønsker i Ønskelisten</h2>
+            <table>
+                <tr>
+                    <th>Item Navn</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Reservations status</th>
+
+                </tr>
+                <tr th:each="item : ${wishlistItems}">
+                    <td th:text="${item.itemName}">Item navn</td>
+                    <td th:text="${item.itemPrice}">Pris</td>
+                    <td th:text="${item.itemQuantity}">Antal</td>
+                    <td>
+                        <span th:if="${item.itemReservedName != null}" th:text="${item.itemReservedName}"></span>
+                        <span th:if="${item.itemReservedName == null}">Ikke reserveret</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

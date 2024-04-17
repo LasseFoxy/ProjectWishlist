@@ -1,28 +1,127 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: "Arial", sans-serif;
+    background-color: #f0e6ff;
     margin: 0;
     padding: 20px;
 }
 
 .content {
-    margin-top: 100px;
-    text-align: center;
+    margin-top: 70px;
 }
 
 .container {
-    min-width: 60vw;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     margin: auto;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-
+    width: 50vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
-h1, h2 {
-    text-align: center;
-    font-family: Verdana, sans-serif;
+.transparent-container {
+    background-color: transparent;
+    box-shadow: none;
+}
 
+
+h1 {
+    text-align: center;
+    font-size: 3vw;
+    font-weight: bold;
+    margin-bottom: 2vw;
+    border-bottom: 0.1vw solid #ccc;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5vw;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+textarea
+{
+    width: 100%;
+    padding: 0.8vw;
+    border: 0.1vw solid #ccc;
+    border-radius: 0.6vw;
+    box-sizing: border-box;
+}
+
+input[type="date"]{
+    width: 17%
+}
+
+button[type="submit"], .home-link, .button {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    min-width: 30%;
+    font-size: 1vw;
+    margin-top: 1vw;
+    padding: 0.5vw 1vw;
+    background: linear-gradient(to bottom, #af67dc, #be74ed);
+    color: white;
+    border: none;
+    border-radius: 0.4vw;
+    cursor: pointer;
+}
+
+.home-link {
+    text-align: center;
+}
+
+button[type="submit"]:hover, .home-link:hover .button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #efe6ff;
+}
+
+.wishlist-buttons {
+    display: flex;
+    align-items: center;
+    width: 27vw;
+}
+
+.wishlist-button {
+    margin-right: 10px;
+}
+
+button.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    justify-content: center;
+    font-weight: 700;
 }

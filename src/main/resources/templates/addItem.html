@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Tilføj Ønske</title>
-  <link th:href="@{/css/addItem.css}" rel="stylesheet">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+
 <body>
 <div th:replace="~{/header :: header}"></div>
 
@@ -12,27 +13,36 @@
   <div class="container">
     <h1>Tilføj ønske</h1>
 
-    <p>Wishlist ID: <span th:text="${wishlistId}"></span></p>
     <form th:action="@{/saveItem}" method="post" th:object="${item}">
       <input type="hidden" id="wishlistId" name="wishlistId" th:value="${wishlistId}">
 
+      <div class="form-group">
       <label for="itemName">Navn:</label>
       <input type="text" id="itemName" name="itemName" th:field="*{itemName}" th:required><br>
+      </div>
 
+      <div class="form-group">
       <label for="itemPrice">Pris:</label>
       <input type="number" id="itemPrice" name="itemPrice" th:field="*{itemPrice}" th:required><br>
+      </div>
 
+      <div class="form-group">
       <label for="itemQuantity">Antal:</label>
       <input type="number" id="itemQuantity" name="itemQuantity" th:field="*{itemQuantity}" th:required><br>
+      </div>
 
+      <div class="form-group">
       <label for="itemLink">Link:</label>
       <input type="url" id="itemLink" name="itemLink" th:field="*{itemLink}"><br>
+      </div>
 
+      <div class="form-group">
       <label for="itemDescription">Beskrivelse:</label>
       <textarea id="itemDescription" name="itemDescription" th:field="*{itemDescription}" th:required></textarea><br>
+      </div>
 
 
-      <button type="submit">Tilføj ønske</button>
+      <button type="submit" class="btn">Tilføj ønske</button>
     </form>
   </div>
 </div>

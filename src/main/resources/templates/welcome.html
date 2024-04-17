@@ -4,42 +4,36 @@
     <meta charset="UTF-8">
     <title>Velkommen</title>
     <link th:href="@{/css/welcome-style.css}" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{/header :: header}"></div>
-
 <div class="content">
     <div class="container">
-        <h1>Velkommen, <span th:text="${loggedInUser.firstname}"></span></h1>
-        <a th:href="@{/wishlist/create}" class="btn">Opret ønskeliste</a>
+        <div class="header">
+            <h1>Velkommen <span th:text="${loggedInUser.firstname}"></span></h1>
+        </div>
 
-        <div class="section">
-            <h2>Ønskelister</h2>
-            <ul>
-                <li th:each="wishlist : ${userWishlists}">
-                    <div class="buttons">
-                        <span th:text="${wishlist.wishlistName}"></span>
-                        <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="btn">Se/rediger</a>
+        <div class="button-container">
+            <a th:href="@{/wishlist/create}" class="main-button">Opret ønskeliste</a>
+        </div>
+        <div class="wishlist-section">
+            <h2>Mine Ønskelister</h2>
+            <table class="wishlist-table">
+                <tr>
+                    <th>Navn</th>
+                    <th>Handlinger</th>
+                </tr>
+                <tr th:each="wishlist : ${userWishlists}">
+                    <td th:text="${wishlist.wishlistName}" class="wishlist-name"></td>
+                    <td class="wishlist-buttons">
                         <form th:action="@{/setSelectedWishlist}" method="post">
-                            <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
-                            <button type="submit" class="btn">Tilføj ønsker></button>
+                            <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}"/>
+                            <button type="submit" class="wishlist-button">Tilføj ønsker</button>
                         </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Brugerens oplysninger</h2>
-            <p><strong>Fornavn:</strong> <span th:text="${loggedInUser.firstname}"></span></p>
-            <p><strong>Efternavn:</strong> <span th:text="${loggedInUser.lastname}"></span></p>
-            <p><strong>Brugernavn:</strong> <span th:text="${loggedInUser.username}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${loggedInUser.email}"></span></p>
-        </div>
-
-        <div class="buttons">
-            <a th:href="@{/profile}" class="btn">Se/rediger profil</a>
+                        <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="wishlist-button">Se/rediger</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
