@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Velkommen</title>
-    <link th:href="@{/css/welcome-style.css}" rel="stylesheet" >
+    <link th:href="@{/css/welcome-style.css}" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{/header :: header}"></div>
@@ -13,9 +13,9 @@
             <h1>Velkommen <span th:text="${loggedInUser.firstname}"></span></h1>
         </div>
 
-            <div class="button-container">
-                <a th:href="@{/wishlist/create}" class="main-button">Opret ønskeliste</a>
-            </div>
+        <div class="button-container">
+            <a th:href="@{/wishlist/create}" class="main-button">Opret ønskeliste</a>
+        </div>
         <div class="wishlist-section">
             <h2>Mine Ønskelister</h2>
             <table class="wishlist-table">
@@ -26,11 +26,11 @@
                 <tr th:each="wishlist : ${userWishlists}">
                     <td th:text="${wishlist.wishlistName}" class="wishlist-name"></td>
                     <td class="wishlist-buttons">
-                        <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="wishlist-button">Se/rediger</a>
                         <form th:action="@{/setSelectedWishlist}" method="post">
-                            <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
+                            <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}"/>
                             <button type="submit" class="wishlist-button">Tilføj ønsker</button>
                         </form>
+                        <a th:href="@{'/wishlist/edit/' + ${wishlist.wishlistId}}" class="wishlist-button">Se/rediger</a>
                     </td>
                 </tr>
             </table>

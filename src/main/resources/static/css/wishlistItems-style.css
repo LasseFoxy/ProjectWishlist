@@ -1,0 +1,31 @@
+.welcome-buttons {
+    display: flex;
+    align-items: center;
+    width: 27vw;
+}
+
+.wishlist-info{
+    display: flex;
+    justify-content: left;
+}
+
+.button-custom {
+    margin-left: 10vw;
+    margin-top: 0;
+    font-size: 2vw;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 1vw;
+}
+
+.button {
+    font-size: 1vw;
+}
+
+.button-special {
+    margin-bottom: 0;
+    padding: 1vw;
+    font-size: 1vw;
+}

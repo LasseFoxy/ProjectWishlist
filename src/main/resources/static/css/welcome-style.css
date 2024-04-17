@@ -75,6 +75,7 @@ h2 {
 
 .main-button:hover, .wishlist-button:hover, .secondary-button:hover {
     background-color: #0056b3;
+    cursor: pointer
 }
 
 .wishlist-list {
@@ -121,18 +122,21 @@ h2 {
 
 .wishlist-table th,
 .wishlist-table td {
-    padding: 6px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.wishlist-table tr:nth-child(odd) {
+    background-color: #efe6ff;
 }
 
 .wishlist-table th {
     background-color: #f2f2f2;
-    text-align: left;
 }
 
 .wishlist-buttons {
     display: flex;
     align-items: center;
+    width: 27vw;
 }
 
 .wishlist-button {
