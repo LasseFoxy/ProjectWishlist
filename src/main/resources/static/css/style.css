@@ -125,3 +125,8 @@ button.btn {
     justify-content: center;
     font-weight: 700;
 }
+
+.edit-container{
+    padding: 2px;
+    display: flex;
+}
