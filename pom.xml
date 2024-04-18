@@ -12,7 +12,6 @@
     <artifactId>ProjectWishlist</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ProjectWishlist</name>
-    <wishlistDescription>ProjectWishlist</wishlistDescription>
     <properties>
         <java.version>22</java.version>
     </properties>
