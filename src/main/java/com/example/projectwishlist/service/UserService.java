@@ -11,11 +11,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    //Forbinder controller og repository (se repository for yderligere forklaringer)
     public void save(User user) {
         userRepository.save(user);
     }
 
-    // UserService
+    // Tjekker om en brugers login-oplysninger er korrekte
     public User validateUser(String usernameOrEmail, String password) {
         User user = userRepository.findByUsernameOrEmail(usernameOrEmail);
         if (user != null && user.getPassword().equals(password)) {

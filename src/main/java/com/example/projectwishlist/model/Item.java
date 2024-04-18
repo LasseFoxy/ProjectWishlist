@@ -1,6 +1,5 @@
 package com.example.projectwishlist.model;
 
-
 public class Item {
 
   private int itemId;

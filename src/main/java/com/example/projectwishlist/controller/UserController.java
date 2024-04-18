@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+//Controller-klasse for brugere (Users)
 @Controller
 public class UserController {
 
@@ -24,25 +25,28 @@ public class UserController {
     @Autowired
     private WishlistService wishlistService;
 
-    // Viser registreringsformularen
+    // Viser formularen for at oprette en bruger
     @GetMapping("/user/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
 
-    // Behandler registreringsformularen
+    // Behandler formularen for at oprette en bruger og redirecter til /welcome
     @PostMapping("/user/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@ModelAttribute User user, HttpSession session) {
         userService.save(user);
-        return "redirect:/user/login";
+        session.setAttribute("loggedInUser", user);
+        return "redirect:/welcome";
     }
 
+    // Viser formularen for at logge ind
     @GetMapping("/user/login")
     public String showLoginForm() {
         return "login";
     }
 
+    // Behandler formularen for at logge ind
     @PostMapping("/user/login")
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User loggedInUser = userService.validateUser(username, password);
@@ -56,7 +60,7 @@ public class UserController {
         }
     }
 
-
+    // Viser brugerens velkomstside, som er adgangspunkt til alle features
     @GetMapping("/welcome")
     public String showWelcomePage(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -71,6 +75,7 @@ public class UserController {
         }
     }
 
+    // Behandler valget for hvilken ønskeliste som vælges at se info for
     @PostMapping("/setSelectedWishlist")
     public String setSelectedWishlist(@RequestParam("wishlistId") int wishlistId, HttpSession session) {
         Wishlist selectedWishlist = wishlistService.getWishlistById(wishlistId);
@@ -82,7 +87,7 @@ public class UserController {
         return "redirect:/wishlist/wishlistItems";
     }
 
-
+    // Viser brugerens profildata i en formular som der også kan redigeres i
     @GetMapping("/profile")
     public String showProfilePage(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -95,6 +100,7 @@ public class UserController {
         }
     }
 
+    // Behandler eventuelle ændringer af profildata
     @PostMapping("/profile")
     public String editProfile(@ModelAttribute User user, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -106,10 +112,11 @@ public class UserController {
         return "redirect:/welcome";
     }
 
+    // Behandler brugerens logout request og redirecter til forsiden
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("loggedInUser"); // Fjern brugeren fra sessionen
-        return "redirect:/"; // Omdiriger til login-siden
+        session.removeAttribute("loggedInUser");
+        return "redirect:/";
     }
 
 }

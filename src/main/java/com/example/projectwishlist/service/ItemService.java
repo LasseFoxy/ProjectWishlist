@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//Forbinder controller og repository (se repository for yderligere forklaringer)
 @Service
 public class ItemService {
 
   @Autowired
   private ItemRepository itemRepository;
 
-  // Gemmer en vare i databasen
   public void saveItem(Item item) {
     itemRepository.save(item);
   }

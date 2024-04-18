@@ -13,11 +13,13 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Gemmer en bruger i databasen
     public void save(User user) {
         String sql = "INSERT INTO users (firstname, lastname, username, email, password) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, user.getFirstname(), user.getLastname(), user.getUsername(), user.getEmail(), user.getPassword());
     }
 
+    // Finder en bruger i databasen efter brugernavn eller email
     public User findByUsernameOrEmail(String usernameOrEmail) {
         String sql = "SELECT * FROM users WHERE username = ? OR email = ?";
         try {
@@ -27,6 +29,7 @@ public class UserRepository {
         }
     }
 
+    // Finder en user i databasen ud fra userId
     public User findById(int userId) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         try {
@@ -36,6 +39,7 @@ public class UserRepository {
         }
     }
 
+    // Opdaterer en brugers informationer i databasen
     public void update(User user) {
         String sql;
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
@@ -47,14 +51,4 @@ public class UserRepository {
         }
     }
 
-    public User getUserFirstName(int userId){
-        String sql = "SELECT firstname FROM users WHERE user_id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(User.class));
-    }
-
-
-    public User getUserLastName(int userId){
-        String sql = "SELECT lastname FROM users WHERE user_id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(User.class));
-    }
 }

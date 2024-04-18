@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+//Controller-klasse for ønsker (Items)
 @Controller
 public class ItemController {
 
   @Autowired
   private ItemService itemService;
 
-
+// Viser formularen for at oprette et ønske
   @GetMapping("/wishlist/addItem")
   public String showAddItemForm(Model model, HttpSession session) {
     User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -36,7 +37,7 @@ public class ItemController {
     }
   }
 
-
+// Behandler formularen for at oprette et ønske
   @PostMapping("/saveItem")
   public String saveItem(@ModelAttribute("item") Item item, HttpSession session) {
     User loggedInUser = (User) session.getAttribute("loggedInUser");

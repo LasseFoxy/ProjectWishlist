@@ -29,6 +29,7 @@ public class WishlistController {
         this.userService = userService;
     }
 
+    // Viser formularen for at oprette en ønskeliste
     @GetMapping("/wishlist/create")
     public String showCreateWishlistForm(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -41,6 +42,7 @@ public class WishlistController {
         }
     }
 
+    // Behandler formularen for at oprette en ønskeliste
     @PostMapping("/wishlist/create")
     public String createWishlist(@ModelAttribute Wishlist wishlist, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -53,6 +55,7 @@ public class WishlistController {
         }
     }
 
+    // Viser data for ønskelisten og mulighed for at tilføje ønsker og dele ønskelisten
     @GetMapping("/wishlist/wishlistItems")
     public String wishlistItems(Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -76,6 +79,7 @@ public class WishlistController {
         }
     }
 
+    // Viser ønskelistens data i en formular som der også kan redigeres i, samt mulighed slette den
     @GetMapping("/wishlist/edit/{wishlistId}")
     public String showUpdateWishlistForm(@PathVariable int wishlistId, Model model, HttpSession session) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -89,25 +93,27 @@ public class WishlistController {
         }
     }
 
-
+    // Behandler formularen for at redigere en ønskeliste
     @PostMapping("/wishlist/update/{wishlistId}")
     public String updateWishlist(@PathVariable int wishlistId, @ModelAttribute Wishlist wishlist, @RequestParam("newDeadlineDate") LocalDate newDeadlineDate) {
         Wishlist originalWishlist = wishlistService.getWishlistById(wishlistId);
 
-        // Tjekker om wishlistDeadlineDate er ændret
+
         if (!newDeadlineDate.equals(originalWishlist.getWishlistDeadlineDate())) {
             wishlist.setWishlistDeadlineDate(newDeadlineDate);
             wishlistService.update(wishlist);
         }
         return "redirect:/welcome";
     }
+
+    // Behandler en anmodning om at slette en ønskeliste
     @PostMapping("/wishlist/delete/{wishlistId}")
     public String deleteWishlist(@PathVariable int wishlistId) {
         wishlistService.delete(wishlistId);
         return "redirect:/welcome";
     }
 
-
+    // Visning for brugere som ønskelisten deles med. Url skabes ud fra det unikke wishlistId.
     @GetMapping("/wishlist/share/{wishlist_id}")
     public String shareWishlist(@PathVariable String wishlist_id, Model model, HttpSession session){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -126,6 +132,7 @@ public class WishlistController {
 
     }
 
+    // Behandler anmodningen om at reservere et ønske
     @PostMapping("/wishlist/share/{wishlist_id}")
     public String reserveItem(@ModelAttribute Item item,@PathVariable String wishlist_id, HttpSession session, Model model){
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -145,6 +152,7 @@ public class WishlistController {
         }
     }
 
+    // Visning for login, hvis man skal se en ønskeliste og ikke er logget ind.
     @GetMapping("/wishlist/share/login/{wishlist_id}")
     public String loginShare(Model model, @PathVariable String wishlist_id){
         boolean numbersOnly = wishlist_id.matches("[0-9]+");
@@ -161,6 +169,7 @@ public class WishlistController {
         return "shareLogin";
     }
 
+    // Behandler login informationerne og sender brugeren videre til den delte ønskeliste
     @PostMapping("/wishlist/share/login/{wishlist_id}")
     public String loginShare(@RequestParam String username, @RequestParam String password,@PathVariable String wishlist_id, HttpSession session, Model model, @ModelAttribute Wishlist wishlist) {
         User loggedInUser = userService.validateUser(username, password);
@@ -174,6 +183,7 @@ public class WishlistController {
         }
     }
 
+    // Viser en side til at oprette login, hvis man skal se en ønskeliste og ikke har en bruger
     @GetMapping("/wishlist/share/register/{wishlist_id}")
     public String registerShare(Model model, @PathVariable String wishlist_id){
         model.addAttribute("wishlist_id", wishlist_id);
@@ -181,6 +191,7 @@ public class WishlistController {
         return "shareRegister";
     }
 
+    // Behandler den oprettede bruger og logger ind og viser den delte ønskeliste
     @PostMapping("/wishlist/share/register/{wishlist_id}")
     public String registerShare(@PathVariable String wishlist_id, @ModelAttribute User user, HttpSession session){
         userService.save(user);
@@ -188,7 +199,4 @@ public class WishlistController {
         String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
         return "redirect:" + link;
     }
-
-
-
 }

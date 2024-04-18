@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+//Forbinder controller og repository (se repository for yderligere forklaringer)
 @Service
 public class WishlistService {
 
