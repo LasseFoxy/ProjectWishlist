@@ -4,49 +4,72 @@
     <meta charset="UTF-8">
     <title>Tilføj Ønske til Ønskeliste</title>
     <link th:href="@{/css/header.css}" rel="stylesheet">
-    <link th:href="@{/css/wishlistItems.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
+<div th:replace="~{/header :: header}"></div>
 
-<div class="container">
-    <h1>Tilføj Ønske til Ønskeliste</h1>
-    <hr>
-    <div class="wishlist-info">
-        <!-- Viser information om ønskelisten -->
-        <p><strong>Navn:</strong> <span th:text="${wishlist.wishlistName}">Navn på Ønskeliste</span></p>
-        <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</span></p>
-        <p><strong>Deadline Dato:</strong> <span th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</span></p>
-    </div>
-    <div class="wishlist-items">
-        <h2>Items i Ønskeliste</h2>
-        <ul>
-            <h3>Ikke Reserverede Ønsker</h3>
-            <li th:each="item : ${wishlistItems}">
-                <form th:if="${!item.itemReservedStatus}" th:action="@{'/wishlist/share/' + ${wishlist.wishlistId}}" method="post">
-                    <input type="hidden" name="itemId" th:value="${item.itemId}" />
-                    <input type="hidden" name="wishlistId" th:value="${item.itemWishlistId}" />
-                    <p>Item Navn:<span th:text="${item.itemName}">Item navn</span></p>
-                    <p>Pris: <span th:text="${item.itemPrice}">Pris</span></p>
-                    <p>Antal: <span th:text="${item.itemQuantity}">Antal</span></p>
-                    <button type="submit">Reserver</button>
-                </form>
-            </li>
-            </ul>
-        <ul>
-            <h3>Reserverede Ønsker</h3>
-            <li th:each="item : ${wishlistItems}">
-                <form th:if="${item.itemReservedStatus}" th:action="@{/wishlist/reserve}" method="post">
-                    <input type="hidden" name="itemId" th:value="${item.itemId}" />
-                    <p><strong>Item Navn:</strong> <span th:text="${item.itemName}">Item navn</span></p>
-                    <p><strong>Pris:</strong> <span th:text="${item.itemPrice}">Pris</span></p>
-                    <p><strong>Antal:</strong> <span th:text="${item.itemQuantity}">Antal</span></p>
-                    <p><strong>Reserveret Navn:</strong> <span th:text="${item.itemReservedName}">Reserveret Navn</span></p>
-                </form>
-            </li>
-        </ul>
-    </div>
+<div class="content">
+    <div class="container">
+        <h1 th:text="${wishlist.wishlistName}">Navn på Ønskeliste </h1>
+        <div class="wishlist-info">
 
+            <table>
+                <tr>
+                    <th>Navn</th>
+                    <td th:text="${wishlist.wishlistName}">Navn på Ønskeliste</td>
+                </tr>
+                <tr>
+                    <th>Deadline Dato</th>
+                    <td th:text="${#temporals.format(wishlist.wishlistDeadlineDate, 'dd-MM-yyyy')}">Deadline dato for Ønskeliste</td>
+                </tr>
+                <tr>
+                    <th>Beskrivelse</th>
+                    <td th:text="${wishlist.wishlistDescription}">Beskrivelse af Ønskeliste</td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="wishlist-items">
+            <h2>Items i Ønskeliste</h2>
+            <table>
+                <tr>
+                    <th>Item Navn</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Handling</th>
+                </tr>
+                <tr th:each="item : ${wishlistItems}" th:if="${!item.itemReservedStatus}">
+                    <form th:action="@{'/wishlist/share/' + ${wishlist.wishlistId}}" method="post">
+                        <input type="hidden" name="itemId" th:value="${item.itemId}" />
+                        <input type="hidden" name="wishlistId" th:value="${item.itemWishlistId}" />
+                        <td><span th:text="${item.itemName}">Item navn</span></td>
+                        <td><span th:text="${item.itemPrice}">Pris</span></td>
+                        <td><span th:text="${item.itemQuantity}">Antal</span></td>
+                        <td><button type="submit">Reserver</button></td>
+                    </form>
+                </tr>
+            </table>
+            <h2>Reserverede Ønsker</h2>
+            <table>
+                <tr>
+                    <th>Item Navn</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Reserveret Navn</th>
+                </tr>
+                <tr th:each="item : ${wishlistItems}" th:if="${item.itemReservedStatus}">
+                    <form  th:action="@{/wishlist/reserve}" method="post">
+                        <input type="hidden" name="itemId" th:value="${item.itemId}" />
+                        <td><span th:text="${item.itemName}">Item navn</span></td>
+                        <td><span th:text="${item.itemPrice}">Pris</span></td>
+                        <td><span th:text="${item.itemQuantity}">Antal</span></td>
+                        <td><span th:text="${item.itemReservedName}">Reserveret Navn</span></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
