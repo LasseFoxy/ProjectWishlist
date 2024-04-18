@@ -6,14 +6,7 @@
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/registerAndProfile-style.css}" rel="stylesheet">
   </head>
-  <div class="header-container">
-    <div class="left">
-      <a th:href="@{/welcome}">
-        <img th:src="@{/images/header/home-button.png}" alt="Home">
-      </a>
-      <span class="header-text">ØNSKELISTEN</span>
-    </div>
-  </div>
+  <div th:replace="~{/fragments/header :: header}"></div>
   <body>
 <div class="content">
   <div class="container">
