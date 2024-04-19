@@ -148,7 +148,7 @@ public class WishlistController {
             return "share";
         } else {
             model.addAttribute("wishlist", selectedWishlist);
-            return "redirect:/shareLogin";
+            return "redirect:/wishlist/share/login/" +wishlist_id;
         }
     }
 
@@ -195,7 +195,7 @@ public class WishlistController {
     @PostMapping("/wishlist/share/register/{wishlist_id}")
     public String registerShare(@PathVariable String wishlist_id, @ModelAttribute User user, HttpSession session){
         userService.save(user);
-        session.setAttribute("loggedInUser", user);
+        session.setAttribute("loggedInUser", userService.validateUser(user.getUsername(), user.getPassword()));
         String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
         return "redirect:" + link;
     }

@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping("/user/register")
     public String registerUser(@ModelAttribute User user, HttpSession session) {
         userService.save(user);
-        session.setAttribute("loggedInUser", user);
+        session.setAttribute("loggedInUser", userService.validateUser(user.getUsername(), user.getPassword()));
         return "redirect:/welcome";
     }
 
