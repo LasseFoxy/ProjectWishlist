@@ -64,7 +64,7 @@ public class WishlistController {
         if (loggedInUser != null && selectedWishlist != null) {
             if (selectedWishlist.getUserId() == loggedInUser.getUserId()) {
                 int wishlist_id = selectedWishlist.getWishlistId();
-                String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+                String link = "http://52.169.79.69:8080/wishlist/share/" + wishlist_id;
                 model.addAttribute("shareLink", link);
                 model.addAttribute("wishlist", selectedWishlist);
                 List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
@@ -120,7 +120,7 @@ public class WishlistController {
         Wishlist selectedWishlist = wishlistService.getWishlistById(Integer.parseInt(wishlist_id));
         model.addAttribute("wishlist", selectedWishlist);
         if (loggedInUser != null){
-            String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+            String link = "http://52.169.79.69:8080/wishlist/share/" + wishlist_id;
             model.addAttribute("shareLink", link);
             List<Item> wishlistItems = itemService.getWishlistItems(selectedWishlist.getWishlistId());
             model.addAttribute("wishlist", selectedWishlist);
@@ -175,7 +175,7 @@ public class WishlistController {
         User loggedInUser = userService.validateUser(username, password);
          if (loggedInUser != null) {
             session.setAttribute("loggedInUser", loggedInUser);
-            String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+            String link = "http://52.169.79.69:8080/wishlist/share/" + wishlist_id;
             return "redirect:" + link;
         }  else {
             model.addAttribute("loginError", "Brugernavn eller Kodeord er forkert.");
@@ -196,7 +196,7 @@ public class WishlistController {
     public String registerShare(@PathVariable String wishlist_id, @ModelAttribute User user, HttpSession session){
         userService.save(user);
         session.setAttribute("loggedInUser", userService.validateUser(user.getUsername(), user.getPassword()));
-        String link = "http://localhost:8080/wishlist/share/" + wishlist_id;
+        String link = "http://52.169.79.69:8080/wishlist/share/" + wishlist_id;
         return "redirect:" + link;
     }
 }
